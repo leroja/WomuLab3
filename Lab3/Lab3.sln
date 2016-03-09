@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab3", "Lab3\Lab3.vcxproj", "{39522A09-965E-4AEB-B09A-EB30B47E03F3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BackgroundTask", "BackgroundTask\BackgroundTask.vcxproj", "{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,18 @@ Global
 		{39522A09-965E-4AEB-B09A-EB30B47E03F3}.Release|x86.ActiveCfg = Release|Win32
 		{39522A09-965E-4AEB-B09A-EB30B47E03F3}.Release|x86.Build.0 = Release|Win32
 		{39522A09-965E-4AEB-B09A-EB30B47E03F3}.Release|x86.Deploy.0 = Release|Win32
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|ARM.ActiveCfg = Debug|ARM
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|ARM.Build.0 = Debug|ARM
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|x64.ActiveCfg = Debug|x64
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|x64.Build.0 = Debug|x64
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|x86.ActiveCfg = Debug|Win32
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Debug|x86.Build.0 = Debug|Win32
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|ARM.ActiveCfg = Release|ARM
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|ARM.Build.0 = Release|ARM
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|x64.ActiveCfg = Release|x64
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|x64.Build.0 = Release|x64
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|x86.ActiveCfg = Release|Win32
+		{50B1C7FB-BFA4-4192-8BC6-9E4216228A57}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

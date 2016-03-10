@@ -1,7 +1,11 @@
 #pragma once
-ref class Wall sealed
+class Wall
 {
 public:
 	Wall();
+private:
+	std::string Title;
+	std::string Description;
+	double Area;
 };
 

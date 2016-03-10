@@ -8,6 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Left" Height="469" VerticalAlignment="Top" Width="350">
+            <Button x:Name="button" Content="kdjafsdhgkj" HorizontalAlignment="Left" VerticalAlignment="Top" Height="84" Width="210" Click="button_Click"/>
+            <Button x:Name="NewRoom" Content="New Room" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="NewRoom_Click"/>
+            <Button x:Name="Continue" Content="Continue Documenting Room" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Continue_Click"/>
+        </StackPanel>
 
     </Grid>
 </Page>

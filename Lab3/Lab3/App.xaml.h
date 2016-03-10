@@ -6,6 +6,8 @@
 #pragma once
 
 #include "App.g.h"
+#include "Room.h"
+#include "Wall.h"
 
 namespace Lab3
 {

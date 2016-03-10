@@ -144,13 +144,31 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Room.h" />
+    <ClInclude Include="RoomChooserView.xaml.h">
+      <DependentUpon>RoomChooserView.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="RoomView1.xaml.h">
+      <DependentUpon>RoomView1.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WallView1.xaml.h">
+      <DependentUpon>WallView1.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RoomChooserView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RoomView1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WallView1.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
@@ -185,7 +203,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="RoomChooserView.xaml.cpp">
+      <DependentUpon>RoomChooserView.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="RoomView1.xaml.cpp">
+      <DependentUpon>RoomView1.xaml</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WallView1.xaml.cpp">
+      <DependentUpon>WallView1.xaml</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BackgroundTask\BackgroundTask.vcxproj">

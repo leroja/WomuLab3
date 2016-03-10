@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="Lab3.WallView1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lab3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock"/>
+            <TextBox x:Name="Title" TextWrapping="Wrap"/>
+            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
+            <TextBox x:Name="Description" TextWrapping="Wrap"/>
+            <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="Area"/>
+            <TextBox x:Name="Area" TextWrapping="Wrap"/>
+            <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text="Wall Image"/>
+            <Button x:Name="ChangePicture" Content="Change Image" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ChangePicture_Click"/>
+            <Image x:Name="WallImage" Height="193"/>
+            <Button x:Name="Save" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Save_Click"/>
+            <Button x:Name="Back" Content="Back" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Back_Click"/>
+            <Button x:Name="Home" Content="Home" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Home_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

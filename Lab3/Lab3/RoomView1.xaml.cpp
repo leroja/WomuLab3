@@ -23,6 +23,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace std;
 using namespace concurrency;
+using namespace Windows::Storage;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -80,6 +81,8 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 {
 	string title, description, temp;
 	double Volume;
+	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
+
 	temp = ConvertToString(RoomVolume->Text);
 	title = ConvertToString(RoomTitle->Text);
 	description = ConvertToString(RoomDescription->Text);

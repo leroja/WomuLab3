@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "RoomView1.xaml.h"
+#include "RoomChooserView.xaml.h"
 
 using namespace Lab3;
 
@@ -21,6 +22,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace concurrency;
 using namespace Windows::Storage;
+using namespace Windows::UI::Xaml::Interop;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -41,26 +43,24 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 {
 
 	//StorageFolder^ tests = KnownFolders::DocumentsLibrary;
-	/*textBlock->Text = tests->ToString();*/
 
 	//Get the app's local folder
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 	textBlock->Text = localFolder->Path;
-	String^ desiredName = "Subfolder";
+	//String^ desiredName = "Subfolder";
 
 	StorageFolder^ appFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
 
-	auto ctF = create_task(localFolder->CreateFolderAsync(desiredName, CreationCollisionOption::OpenIfExists)).then([](StorageFolder^ folder) {
-		//Do something with folder
-
-	});
+	//auto ctF = create_task(localFolder->CreateFolderAsync(desiredName, CreationCollisionOption::OpenIfExists)).then([](StorageFolder^ folder) {
+	//	//Do something with folder
+	//
+	//});
 	
 
-	StorageFile^ tsts;
 	
 	//Create a new file in the current folder.
 	//Raises an exception if the file already exists
-	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt", CreationCollisionOption::OpenIfExists)).then([](StorageFile^ newFile) {
+	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt", CreationCollisionOption::OpenIfExists)).then([this](StorageFile^ newFile) {
 		
 		
 		
@@ -73,16 +73,20 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 		});
 		//Do something with new file
 
-
+		testtest(newFile);
 	});
-	
-	this->file = tsts;
+
+
+	Room newRoom;
+
+	//this->Frame->Navigate(TypeName(RoomView1::typeid));
+
 }
 
 
 void Lab3::MainPage::Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomChooserView::typeid));
 }
 
 

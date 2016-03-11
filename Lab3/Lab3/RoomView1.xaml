@@ -8,26 +8,30 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Room Title"/>
-            <TextBox x:Name="RoomTitle" TextWrapping="Wrap"/>
-            <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
-            <TextBox x:Name="RoomDescription" TextWrapping="Wrap" Height="103"/>
-            <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="Latitude Coordinate"/>
-            <TextBox x:Name="Latitude" TextWrapping="Wrap"/>
-            <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>
-            <TextBox x:Name="Longitude" TextWrapping="Wrap"/>
-            <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text="RoomVolume"/>
-            <TextBox x:Name="RoomVolume" TextWrapping="Wrap"/>
-            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="91,0,71,0" Click="SaveButton_Click"/>
-            <TextBlock x:Name="em"/>
-            <Button x:Name="Wall1" Content="Wall1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall1_Click"/>
-            <Button x:Name="Wall2" Content="Wall2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall2_Click"/>
-            <Button x:Name="Wall3" Content="Wall3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall3_Click"/>
-            <Button x:Name="Wall4" Content="Wall4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall4_Click"/>
-            <Button x:Name="Roof" Content="Roof" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Roof_Click"/>
-            <Button x:Name="Floor" Content="Floor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Floor_Click"/>
-            <Button x:Name="HomeButton" Content="Home" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,264,0" Click="HomeButton_Click"/>
-        </StackPanel>
+        <ScrollViewer HorizontalAlignment="Left"  VerticalAlignment="Top" VerticalScrollMode="Enabled" 
+                      HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden" 
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Room Title"/>
+                <TextBox x:Name="RoomTitle" TextWrapping="Wrap"/>
+                <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
+                <TextBox x:Name="RoomDescription" TextWrapping="Wrap" Height="103"/>
+                <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="Latitude Coordinate"/>
+                <TextBox x:Name="Latitude" TextWrapping="Wrap"/>
+                <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>
+                <TextBox x:Name="Longitude" TextWrapping="Wrap"/>
+                <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text="RoomVolume"/>
+                <TextBox x:Name="RoomVolume" TextWrapping="Wrap"/>
+                <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="91,0,71,0" Click="SaveButton_Click"/>
+                <TextBlock x:Name="em"/>
+                <Button x:Name="Wall1" Content="Wall1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall1_Click"/>
+                <Button x:Name="Wall2" Content="Wall2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall2_Click"/>
+                <Button x:Name="Wall3" Content="Wall3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall3_Click"/>
+                <Button x:Name="Wall4" Content="Wall4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Wall4_Click"/>
+                <Button x:Name="Roof" Content="Roof" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Roof_Click"/>
+                <Button x:Name="Floor" Content="Floor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Floor_Click"/>
+                <Button x:Name="HomeButton" Content="Home" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,264,0" Click="HomeButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

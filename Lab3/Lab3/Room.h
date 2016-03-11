@@ -4,6 +4,7 @@ class Room
 {
 public:
 	Room();
+	Room(std::string title, std::string desc);
 	std::string GetTitle() const { return Title; };
 	void SetTitle(const std::string& title) { Title = title; }
 	std::string GetDescription() const { return Description; };

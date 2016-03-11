@@ -8,11 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Left" Height="517" VerticalAlignment="Top" Width="350">
+        <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Room Title"/>
             <TextBox x:Name="RoomTitle" TextWrapping="Wrap"/>
             <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
-            <TextBox x:Name="RoomDescription" TextWrapping="Wrap"/>
+            <TextBox x:Name="RoomDescription" TextWrapping="Wrap" Height="103"/>
             <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="Latitude Coordinate"/>
             <TextBox x:Name="Latitude" TextWrapping="Wrap"/>
             <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>

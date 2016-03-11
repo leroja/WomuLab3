@@ -27,6 +27,7 @@ using namespace Windows::Storage;
 MainPage::MainPage()
 {
 	InitializeComponent();
+	
 }
 
 
@@ -38,31 +39,86 @@ void Lab3::MainPage::button_Click(Platform::Object^ sender, Windows::UI::Xaml::R
 
 void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+
+	//StorageFolder^ tests = KnownFolders::DocumentsLibrary;
+	/*textBlock->Text = tests->ToString();*/
+
 	//Get the app's local folder
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
+	textBlock->Text = localFolder->Path;
 	String^ desiredName = "Subfolder";
 
 	StorageFolder^ appFolder = Windows::ApplicationModel::Package::Current->InstalledLocation;
 
-	auto ctF = create_task(localFolder->CreateFolderAsync(desiredName, Windows::Storage::CreationCollisionOption::FailIfExists)).then([](StorageFolder^ folder) {
+	auto ctF = create_task(localFolder->CreateFolderAsync(desiredName, CreationCollisionOption::OpenIfExists)).then([](StorageFolder^ folder) {
 		//Do something with folder
+
 	});
+	
 
-
-
-	//StorageFolder test = ApplicationData::Current->LocalFolder->CreateFolderAsync("test", CreationCollisionOption::OpenIfExists);
-
+	StorageFile^ tsts;
+	
 	//Create a new file in the current folder.
 	//Raises an exception if the file already exists
-	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt")).then([](StorageFile^ newFile) {
+	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt", CreationCollisionOption::OpenIfExists)).then([](StorageFile^ newFile) {
+		
+		
+		
 
+		String^ te = "test tets";
+
+		create_task(FileIO::WriteTextAsync(newFile, te)).then([](task<void> task)
+		{
+			
+		});
 		//Do something with new file
 
+
 	});
+	
+	this->file = tsts;
 }
 
 
 void Lab3::MainPage::Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 
+}
+
+
+void Lab3::MainPage::button1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	StorageFile^ file = this->file;
+	if (file != nullptr)
+	{
+		create_task(FileIO::ReadTextAsync(file)).then([this, file](task<String^> task)
+		{
+			try
+			{
+				String^ fileContent = task.get();
+				test(fileContent);
+			}
+			catch (COMException^ ex)
+			{
+				
+			}
+		});
+	}
+	else
+	{
+		
+	}
+}
+
+void MainPage::test(Platform::String^ content) {
+
+	
+	textBlock1->Text = content;
+
+	
+}
+
+void MainPage::testtest(Windows::Storage::StorageFile^ newFile) {
+
+	this->file = newFile;
 }

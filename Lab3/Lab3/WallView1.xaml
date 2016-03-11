@@ -12,7 +12,7 @@
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock"/>
             <TextBox x:Name="Title" TextWrapping="Wrap"/>
             <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
-            <TextBox x:Name="Description" TextWrapping="Wrap"/>
+            <TextBox x:Name="Description" TextWrapping="Wrap" Height="100"/>
             <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="Area"/>
             <TextBox x:Name="Area" TextWrapping="Wrap"/>
             <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text="Wall Image"/>

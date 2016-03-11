@@ -19,6 +19,7 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Windows::Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,9 +31,38 @@ WallView1::WallView1()
 
 
 
+void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
+{
+	try
+	{
+		Wall^ newWall = (Wall^)e->Parameter;
+
+		if (wall != nullptr) {
+			this->wall = newWall;
+			this->Title->Text = this->wall->GetTitle();
+			this->Description->Text = this->wall->GetDescription();
+
+		}
+	}
+	catch (const std::exception&)
+	{
+
+	}
+
+}
+
+
+
 void Lab3::WallView1::Save_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	Platform::String^ title, ^ description;
+	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 
+	title = Title->Text;
+	description = Description->Text;
+
+	this->wall->setTitle(title);
+	this->wall->setDescription(description);
 }
 
 

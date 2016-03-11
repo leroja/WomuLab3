@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="350" Margin="0,105,0,0" SelectionChanged="listBox_SelectionChanged">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="562" VerticalAlignment="Top" Width="350" Margin="0,68,0,0" SelectionChanged="listBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -28,7 +28,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Margin="0,0,0,0" Height="100" VerticalAlignment="Top">
+        <StackPanel Margin="0,0,0,0" Height="63" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Documented Rooms" HorizontalAlignment="Center"/>
             <Button Name="Home_Button" Click="Home_Button_Click" Content="Home"/>
         </StackPanel>

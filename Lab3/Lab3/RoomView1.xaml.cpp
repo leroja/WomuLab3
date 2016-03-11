@@ -34,13 +34,45 @@ RoomView1::RoomView1()
 
 }
 
+
+
+void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
+{
+	try
+	{
+		Room^ room = (Room^)e->Parameter;
+
+		if (room != nullptr) {
+			this->room = room;
+			RoomTitle->Text = room->GetTitle();
+			RoomDescription->Text = room->GetDescription();
+
+
+		}
+	}
+	catch (const std::exception&)
+	{
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
 void Lab3::RoomView1::Floor_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid));
 }
 
 
-void Lab3::RoomView1::Roof_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Lab3::RoomView1::Ceiling_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid));
 }
@@ -66,7 +98,7 @@ void Lab3::RoomView1::Wall2_Click(Platform::Object^ sender, Windows::UI::Xaml::R
 
 void Lab3::RoomView1::Wall1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid));
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetWall1());
 }
 
 
@@ -79,22 +111,13 @@ void Lab3::RoomView1::HomeButton_Click(Platform::Object^ sender, Windows::UI::Xa
 
 void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	string title, description, temp;
-	double Volume;
+	Platform::String^ title, ^ description;
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
+	double Volume = this->room->getVolume();
 
-	temp = ConvertToString(RoomVolume->Text);
-	title = ConvertToString(RoomTitle->Text);
-	description = ConvertToString(RoomDescription->Text);
-	Volume = ::atof(temp.c_str());
+	title = RoomTitle->Text;
+	description = RoomDescription->Text;
 
-	this->room.SetTitle(title);
-	this->room.SetDescription(description);
-}
-
-std::string RoomView1::ConvertToString(Platform::String^ ps)
-{
-	std::wstring fooW(ps->Begin());
-	std::string fooA(fooW.begin(), fooW.end());
-	return fooA;
+	this->room->setTitle(title);
+	this->room->setDescription(description);
 }

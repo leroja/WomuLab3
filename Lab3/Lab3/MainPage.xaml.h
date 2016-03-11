@@ -18,12 +18,7 @@ namespace Lab3
 		MainPage();
 
 	private:
-		void button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void button1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		Windows::Storage::StorageFile^ file;
-		void test(Platform::String^ content);
-		void testtest(Windows::Storage::StorageFile^ newFile);
 	};
 }

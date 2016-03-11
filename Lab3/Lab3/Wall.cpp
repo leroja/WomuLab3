@@ -6,3 +6,8 @@ Wall::Wall()
 {
 
 }
+
+Wall::~Wall()
+{
+
+}

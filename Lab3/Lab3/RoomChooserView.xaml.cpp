@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "RoomChooserView.xaml.h"
 #include "MainPage.xaml.h"
+#include "RoomView1.xaml.h"
 #include <list>
 
 using namespace Lab3;
@@ -52,10 +53,10 @@ RoomChooserView::RoomChooserView()
 
 
 
-	Room t("hej", "test");
-	Room t2("hej2", "test");
-	Room t3("hej3", "test");
-	Room t4("hej4", "test");
+	//Room t("hej", "test");
+	//Room t2("hej2", "test");
+	//Room t3("hej3", "test");
+	//Room t4("hej4", "test");
 	
 	//listBox->Items->Append(t);
 
@@ -74,6 +75,9 @@ void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, W
 
 	String^ ayf = listBox->SelectedItem->ToString();
 
+	Room^ selectedRoom;
+	//selectedRoom = (Room)tempSelected;
 
-	//Room selectedRoom = (Room)tempSelected;
+
+	this->Frame->Navigate(TypeName(RoomView1::typeid), selectedRoom);
 }

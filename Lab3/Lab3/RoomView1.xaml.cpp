@@ -46,6 +46,8 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 			this->room = room;
 			RoomTitle->Text = room->GetTitle();
 			RoomDescription->Text = room->GetDescription();
+			Longitude->Text = room->GetLongitude().ToString();
+			Latitude->Text = room->GetLatitude().ToString();
 
 
 		}
@@ -120,4 +122,19 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 
 	this->room->setTitle(title);
 	this->room->setDescription(description);
+
+
+
+	//Platform::String^ FileName = "namn.end";
+
+	//auto createFileTask = create_task(localFolder->CreateFileAsync(FileName, CreationCollisionOption::ReplaceExisting)).then([](StorageFile^ newFile) {
+
+	//	//temp
+	//	String^ te = "test tets";
+	//	create_task(FileIO::WriteTextAsync(newFile,te)).then([](task<void> task)
+	//	{
+	//	
+	//	});
+	//	//Do something with new file
+	//});
 }

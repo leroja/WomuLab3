@@ -136,6 +136,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GeoFenceStuff.h" />
     <ClInclude Include="ChangePicView.xaml.h">
       <DependentUpon>ChangePicView.xaml</DependentUpon>
     </ClInclude>
@@ -197,6 +198,7 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="GeoFenceStuff.cpp" />
     <ClCompile Include="ChangePicView.xaml.cpp">
       <DependentUpon>ChangePicView.xaml</DependentUpon>
     </ClCompile>

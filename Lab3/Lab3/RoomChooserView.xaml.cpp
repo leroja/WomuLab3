@@ -37,7 +37,10 @@ RoomChooserView::RoomChooserView()
 	InitializeComponent();
 
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
-	auto createFileTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
+
+
+
+	auto getFilesTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
 		//Iterate over the results and print the list of files
 		// to the visual studio output window
 		for (auto it = filesInFolder->First(); it->HasCurrent; it->MoveNext())
@@ -45,6 +48,7 @@ RoomChooserView::RoomChooserView()
 			StorageFile^ file = it->Current;
 			String^ output = file->Name + "\n";
 			OutputDebugString(output->Begin());
+
 		}
 	});
 

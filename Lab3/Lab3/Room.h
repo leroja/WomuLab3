@@ -7,10 +7,12 @@ ref class Room sealed
 public:
 	Room();
 	virtual ~Room();
-	Room(Platform::String^ title, Platform::String^ desc);
+	Room(Platform::String^ title, Platform::String^ desc, double lati, double longi);
 
 	Platform::String^ GetTitle() { return Title; };
 	Platform::String^ GetDescription() { return Description; };
+	double GetLatitude() { return latitude; };
+	double GetLongitude() { return longitude; };
 
 	Wall^ GetWall1() { return Wall1; };
 	Wall^ GetWall2() { return Wall2; };
@@ -33,7 +35,7 @@ private:
 	Wall^ Floor;
 	Platform::String^ Title;
 	Platform::String^ Description;
-	// latitude
-	// longitude
+	double latitude;
+	double longitude;
 };
 

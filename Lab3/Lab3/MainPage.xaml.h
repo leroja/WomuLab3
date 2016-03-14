@@ -20,5 +20,6 @@ namespace Lab3
 	private:
 		void NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
 	};
 }

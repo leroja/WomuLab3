@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Lab3.ChangePicView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lab3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="NewPicText" HorizontalAlignment="Left" Margin="70,50,0,0" TextWrapping="Wrap" Text="Take New Picture" VerticalAlignment="Top" Width="125" Height="30"/>
+        <TextBlock x:Name="OldPicText" HorizontalAlignment="Left" Margin="70,285,0,0" TextWrapping="Wrap" Text="Choose Picture" VerticalAlignment="Top" Width="125"/>
+        <Button x:Name="NewPic" Content="New Picture" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0" Width="280" Click="NewPic_Click"/>
+        <Button x:Name="OldPic" Content="Old Picture" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Width="280" Click="OldPic_Click" Height="30"/>
+        <Button x:Name="Back" Content="Back" HorizontalAlignment="Left" Margin="30,475,0,0" VerticalAlignment="Top" Width="120" Click="Back_Click"/>
+        <Button x:Name="Pic" Content="" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top" Height="80" Width="280" />
+    </Grid>
+</Page>

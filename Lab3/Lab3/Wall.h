@@ -1,4 +1,6 @@
 #pragma once
+
+
 ref class Wall sealed
 {
 public:
@@ -10,6 +12,8 @@ public:
 
 	void setTitle(Platform::String^ title) { this->Title = title; };
 	void setDescription(Platform::String^ desc) { this->Description = desc; };
+	
+
 private:
 	Platform::String^ Title;
 	Platform::String^ Description;

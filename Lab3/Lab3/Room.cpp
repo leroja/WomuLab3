@@ -5,17 +5,17 @@
 Room::Room()
 {
 
-}
-
-Room::~Room()
-{
-
 	this->Ceiling = ref new Wall();
 	this->Floor = ref new Wall();
 	this->Wall1 = ref new Wall();
 	this->Wall2 = ref new Wall();
 	this->Wall3 = ref new Wall();
 	this->Wall4 = ref new Wall();
+}
+
+Room::~Room()
+{
+
 }
 
 Room::Room(Platform::String^ title, Platform::String^ desc, double lati, double longi) {

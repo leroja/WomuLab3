@@ -9,12 +9,14 @@
 #include "pch.h"
 #include "XamlTypeInfo.g.h"
 
+#include "ChangePicView.xaml.h"
 #include "App.xaml.h"
 #include "MainPage.xaml.h"
 #include "RoomChooserView.xaml.h"
 #include "RoomView1.xaml.h"
 #include "WallView1.xaml.h"
 #include "XamlBindingInfo.g.hpp"
+#include "ChangePicView.g.hpp"
 #include "App.g.hpp"
 #include "MainPage.g.hpp"
 #include "RoomChooserView.g.hpp"
@@ -68,34 +70,40 @@ TypeInfo TypeInfos[] =
     //   0
     L"Lab3.MainPage", L"",
     &ActivateType<::Lab3::MainPage>, nullptr, nullptr, nullptr,
-    4, // Windows.UI.Xaml.Controls.Page
+    5, // Windows.UI.Xaml.Controls.Page
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   1
     L"Lab3.RoomView1", L"",
     &ActivateType<::Lab3::RoomView1>, nullptr, nullptr, nullptr,
-    4, // Windows.UI.Xaml.Controls.Page
+    5, // Windows.UI.Xaml.Controls.Page
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   2
     L"Lab3.WallView1", L"",
     &ActivateType<::Lab3::WallView1>, nullptr, nullptr, nullptr,
-    4, // Windows.UI.Xaml.Controls.Page
+    5, // Windows.UI.Xaml.Controls.Page
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   3
-    L"Lab3.RoomChooserView", L"",
-    &ActivateType<::Lab3::RoomChooserView>, nullptr, nullptr, nullptr,
-    4, // Windows.UI.Xaml.Controls.Page
+    L"Lab3.ChangePicView", L"",
+    &ActivateType<::Lab3::ChangePicView>, nullptr, nullptr, nullptr,
+    5, // Windows.UI.Xaml.Controls.Page
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
     true,  false, false, false,
     //   4
+    L"Lab3.RoomChooserView", L"",
+    &ActivateType<::Lab3::RoomChooserView>, nullptr, nullptr, nullptr,
+    5, // Windows.UI.Xaml.Controls.Page
+    0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Custom,
+    true,  false, false, false,
+    //   5
     L"Windows.UI.Xaml.Controls.Page", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
     0, 0, ::Windows::UI::Xaml::Interop::TypeKind::Metadata,
     false, true,  false, false,
-    //   5
+    //   6
     L"Windows.UI.Xaml.Controls.UserControl", L"",
     nullptr, nullptr, nullptr, nullptr,
     -1,
@@ -129,25 +137,25 @@ UINT TypeInfoLookup[] = {
       3,   //  16
       3,   //  17
       3,   //  18
-      3,   //  19
-      3,   //  20
-      4,   //  21
-      4,   //  22
-      4,   //  23
-      4,   //  24
-      4,   //  25
-      4,   //  26
-      4,   //  27
-      4,   //  28
-      4,   //  29
-      5,   //  30
-      5,   //  31
-      5,   //  32
-      5,   //  33
-      5,   //  34
-      5,   //  35
-      5,   //  36
-      6,   //  37
+      4,   //  19
+      4,   //  20
+      5,   //  21
+      5,   //  22
+      5,   //  23
+      5,   //  24
+      5,   //  25
+      5,   //  26
+      5,   //  27
+      5,   //  28
+      5,   //  29
+      6,   //  30
+      6,   //  31
+      6,   //  32
+      6,   //  33
+      6,   //  34
+      6,   //  35
+      6,   //  36
+      7,   //  37
 };
 
 TypeInfo* GetTypeInfo(::Platform::String^ typeName)

@@ -79,5 +79,6 @@
     <Page Include="WallView1.xaml" />
     <Page Include="RoomView1.xaml" />
     <Page Include="RoomChooserView.xaml" />
+    <Page Include="ChangePicView.xaml" />
   </ItemGroup>
 </Project>

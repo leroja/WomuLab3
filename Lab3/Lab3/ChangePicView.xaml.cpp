@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "ChangePicView.xaml.h"
+#include "Wall.h"
 
 using namespace Lab3;
 
@@ -30,6 +31,7 @@ ChangePicView::ChangePicView()
 }
 
 
+
 void Lab3::ChangePicView::NewPic_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	CameraCaptureUI^ camera = ref new CameraCaptureUI();
@@ -41,6 +43,7 @@ void Lab3::ChangePicView::NewPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);
+			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid), this->wall);
 		});
 	});
 }
@@ -62,6 +65,7 @@ void Lab3::ChangePicView::OldPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);	
+			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid), this->wall);
 		});
 	});
 
@@ -77,7 +81,16 @@ void Lab3::ChangePicView::setPic(Windows::Storage::Streams::IRandomAccessStream 
 {
 	BitmapImage^ bitmapImage = ref new BitmapImage();
 	bitmapImage->SetSource(stream);
-	auto t1 = ref new Image();
-	t1->Source = bitmapImage;
-	Pic->Content = t1;
+	Image^ image = ref new Image();
+	image->Source = bitmapImage;
+	auto t2 = ref new Wall();
+	t2->setWallImage(image);
+	t2->setTitle(wall->GetTitle());
+	t2->setDescription(wall->GetDescription());
+	this->wall = t2;
+}
+
+void Lab3::ChangePicView::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
+{
+	this->wall = (Wall^)e->Parameter;
 }

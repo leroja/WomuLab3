@@ -22,5 +22,8 @@ namespace Lab3
 		void OldPic_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Back_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void setPic(Windows::Storage::Streams::IRandomAccessStream^ stream);
+		Wall^ wall;
+	protected:
+		virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 	};
 }

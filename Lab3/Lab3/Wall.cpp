@@ -5,7 +5,9 @@ using namespace std;
 
 Wall::Wall()
 {
-
+	Title = "";
+	Description = "";
+	wallImage = nullptr;
 }
 
 Wall::~Wall()

@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="Lab3.RoomView1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lab3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer HorizontalAlignment="Left"  VerticalAlignment="Top" VerticalScrollMode="Enabled" 
+                      HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden" 
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
+                <TextBlock x:ConnectionId='1' x:Name="textBlock" TextWrapping="Wrap" Text="Room Title"/>
+                <TextBox x:ConnectionId='2' x:Name="RoomTitle" TextWrapping="Wrap"/>
+                <TextBlock x:ConnectionId='3' x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
+                <TextBox x:ConnectionId='4' x:Name="RoomDescription" TextWrapping="Wrap" Height="103"/>
+                <TextBlock x:ConnectionId='5' x:Name="textBlock4" TextWrapping="Wrap" Text="Latitude Coordinate"/>
+                <TextBlock x:ConnectionId='6' x:Name="Latitude" TextWrapping="Wrap"/>
+                <TextBlock x:ConnectionId='7' x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>
+                <TextBlock x:ConnectionId='8' x:Name="Longitude" TextWrapping="Wrap"/>
+                <TextBlock x:ConnectionId='9' x:Name="textBlock6" TextWrapping="Wrap" Text="RoomVolume"/>
+                <TextBlock x:ConnectionId='10' x:Name="RoomVolume" TextWrapping="Wrap"/>
+                <Button x:ConnectionId='11' x:Name="SaveButton" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="91,0,71,0"                         />
+                <TextBlock x:ConnectionId='12' x:Name="em"/>
+                <Button x:ConnectionId='13' x:Name="Wall1" Content="Wall1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                    />
+                <Button x:ConnectionId='14' x:Name="Wall2" Content="Wall2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                    />
+                <Button x:ConnectionId='15' x:Name="Wall3" Content="Wall3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                    />
+                <Button x:ConnectionId='16' x:Name="Wall4" Content="Wall4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                    />
+                <Button x:ConnectionId='17' x:Name="Ceiling" Content="Ceiling" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                      />
+                <Button x:ConnectionId='18' x:Name="Floor" Content="Floor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                    />
+                <Button x:ConnectionId='19' x:Name="HomeButton" Content="Home" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,264,0"                         />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
+

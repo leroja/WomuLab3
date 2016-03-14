@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="RoomView1.xaml.cpp" />
     <ClCompile Include="WallView1.xaml.cpp" />
+    <ClCompile Include="RoomChooserView.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -40,6 +41,7 @@
     </ClInclude>
     <ClInclude Include="RoomView1.xaml.h" />
     <ClInclude Include="WallView1.xaml.h" />
+    <ClInclude Include="RoomChooserView.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -75,5 +77,6 @@
     <Page Include="WallView1.xaml" />
     <Page Include="RoomView1.xaml" />
     <Page Include="RoomChooserView.xaml" />
+    <Page Include="ChangePicView.xaml" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@
 #include "pch.h"
 #include "WallView1.xaml.h"
 #include "MainPage.xaml.h"
-
+#include "ChangePicView.xaml.h"
 using namespace Lab3;
 
 using namespace Platform;
@@ -80,5 +80,5 @@ void Lab3::WallView1::Home_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
 
 void Lab3::WallView1::ChangePicture_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid));
 }

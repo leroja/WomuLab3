@@ -12,7 +12,7 @@
                       HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden" 
                       VerticalScrollBarVisibility="Auto">
             <StackPanel HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="350">
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock"/>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Title"/>
                 <TextBox x:Name="Title" TextWrapping="Wrap"/>
                 <TextBlock x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
                 <TextBox x:Name="Description" TextWrapping="Wrap" Height="100"/>

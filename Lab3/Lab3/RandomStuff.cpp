@@ -12,6 +12,8 @@ RandomStuff::~RandomStuff()
 {
 }
 
+
+
 Platform::String ^ RandomStuff::GenerateSaveString(Room ^ room)
 {
 	String^ returnString;
@@ -29,21 +31,28 @@ Platform::String ^ RandomStuff::GenerateSaveString(Room ^ room)
 	return returnString;
 }
 
+Platform::String ^ RandomStuff::GeneratePicPath(Room ^ room, Wall ^ wall)
+{
+	String^ l;
+
+
+
+	return  l;
+}
+
 Platform::String ^ RandomStuff::WallString(Wall ^ wall)
 {
 	String^ wallStr, ^ title, ^desc, ^area,^picPath;
 	if (wall != nullptr)
 	{
-		Windows::UI::Xaml::Controls::Image^ img = wall->getImage();
-		Windows::UI::Xaml::Media::ImageSource^ l = img->Source;
 		
-		// get path
+//		picPath = GeneratePicPath();
 		double ar = wall->GetArea();
 		area = "" + ar;
 		title = wall->GetTitle();
 		desc = wall->GetDescription();
 
-		wallStr = title + desc + area + picPath;
+		wallStr = title + "\n" + desc + "\n" + area + "\n" + picPath + "\n";
 	}
 	else
 	{

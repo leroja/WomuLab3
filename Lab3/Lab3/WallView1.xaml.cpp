@@ -26,7 +26,6 @@ using namespace Windows::Storage;
 WallView1::WallView1()
 {
 	InitializeComponent();
-	Area->Text = "test";
 }
 
 
@@ -37,7 +36,7 @@ void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
 	{
 		Wall^ newWall = (Wall^)e->Parameter;
 
-		if (wall != nullptr) {
+		if (newWall != nullptr) {
 			this->wall = newWall;
 			this->Title->Text = this->wall->GetTitle();
 			this->Description->Text = this->wall->GetDescription();
@@ -59,14 +58,17 @@ void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
 void Lab3::WallView1::Save_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	Platform::String^ title, ^ description;
+	double area;
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 
 	title = Title->Text;
 	description = Description->Text;
+	wchar_t* end_parse;
+	area = wcstod(Area->Text->Data(), &end_parse);
 
 	this->wall->setTitle(title);
 	this->wall->setDescription(description);
-
+	this->wall->setArea(area);
 
 
 

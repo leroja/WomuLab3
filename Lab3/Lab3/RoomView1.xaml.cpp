@@ -46,6 +46,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 			this->room = room;
 			RoomTitle->Text = room->GetTitle();
 			RoomDescription->Text = room->GetDescription();
+			RoomVolume->Text = room->getVolume().ToString();
 			Longitude->Text = room->GetLongitude().ToString();
 			Latitude->Text = room->GetLatitude().ToString();
 
@@ -70,7 +71,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 
 void Lab3::RoomView1::Floor_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid));
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetFloor());
 }
 
 

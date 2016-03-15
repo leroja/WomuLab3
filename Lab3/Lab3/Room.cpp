@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Room.h"
+#include <cmath>
 
 
 Room::Room()
@@ -35,6 +36,32 @@ double Room::getVolume() {
 
 
 	//temp
-	return 0.0;
+	if (this->Floor != nullptr) {
+
+		double baseArea = this->Floor->GetArea();
+		double height = 0.0;
+
+		if (this->Wall1 != nullptr) {
+			height = sqrt(this->Wall1->GetArea());
+		}
+		else if (this->Wall2 != nullptr) {
+			height = sqrt(this->Wall2->GetArea());
+		}
+		else if (this->Wall3 != nullptr) {
+			height = sqrt(this->Wall3->GetArea());
+		}
+		else if (this->Wall4 != nullptr) {
+			height = sqrt(this->Wall4->GetArea());
+		}
+		else {
+			return 0.0;
+		}
+		return baseArea * height;
+	}
+	else {
+
+		return 0.0;
+	}
+
 
 }

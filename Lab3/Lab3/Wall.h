@@ -15,6 +15,7 @@ public:
 	void setTitle(Platform::String^ title) { this->Title = title; };
 	void setDescription(Platform::String^ desc) { this->Description = desc; };
 	void setWallImage(Windows::UI::Xaml::Controls::Image^ image) { wallImage = image; };
+	void setArea(double area) { this->Area = area; };
 	
 	
 private:

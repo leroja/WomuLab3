@@ -40,6 +40,7 @@ void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
 			this->wall = newWall;
 			this->Title->Text = this->wall->GetTitle();
 			this->Description->Text = this->wall->GetDescription();
+			this->Area->Text = this->wall->GetArea().ToString();
 			if (this->wall->getImage() != nullptr) {
 				this->WallImage->Source = this->wall->getImage()->Source;
 			}
@@ -97,18 +98,23 @@ void Lab3::WallView1::Back_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
 
 void Lab3::WallView1::Home_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(MainPage::typeid));
+	//this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(MainPage::typeid));
 }
 
 
 void Lab3::WallView1::ChangePicture_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	Platform::String^ title, ^ description;
+	double area;
 
 	title = Title->Text;
 	description = Description->Text;
+	wchar_t* end_parse;
+	area = wcstod(Area->Text->Data(), &end_parse);
 
 	this->wall->setTitle(title);
 	this->wall->setDescription(description);
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid),wall);
+	this->wall->setArea(area);
+
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid), this->wall);
 }

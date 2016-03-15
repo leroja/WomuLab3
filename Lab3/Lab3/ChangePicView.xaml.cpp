@@ -44,7 +44,8 @@ void Lab3::ChangePicView::NewPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);
-			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
+			//this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
+			this->Frame->GoBack();
 		});
 	});
 }
@@ -66,7 +67,8 @@ void Lab3::ChangePicView::OldPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);	
-			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
+			//this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
+			this->Frame->GoBack();
 		});
 	});
 
@@ -84,11 +86,7 @@ void Lab3::ChangePicView::setPic(Windows::Storage::Streams::IRandomAccessStream 
 	bitmapImage->SetSource(stream);
 	Image^ image = ref new Image();
 	image->Source = bitmapImage;
-	auto t2 = ref new Wall();
-	t2->setWallImage(image);
-	t2->setTitle(wall->GetTitle());
-	t2->setDescription(wall->GetDescription());
-	this->wall = t2;
+	this->wall->setWallImage(image);
 }
 
 void Lab3::ChangePicView::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)

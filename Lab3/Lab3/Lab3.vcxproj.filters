@@ -29,6 +29,8 @@
     <ClCompile Include="WallView1.xaml.cpp" />
     <ClCompile Include="RoomChooserView.xaml.cpp" />
     <ClCompile Include="GeoFenceStuff.cpp" />
+    <ClCompile Include="ChangePicView.xaml.cpp" />
+    <ClCompile Include="RandomStuff.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -44,6 +46,8 @@
     <ClInclude Include="WallView1.xaml.h" />
     <ClInclude Include="RoomChooserView.xaml.h" />
     <ClInclude Include="GeoFenceStuff.h" />
+    <ClInclude Include="ChangePicView.xaml.h" />
+    <ClInclude Include="RandomStuff.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">

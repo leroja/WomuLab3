@@ -10,6 +10,7 @@ public:
 	Platform::String^ GetTitle() { return(Title); };
 	Platform::String^ GetDescription() { return Description; };
 	Windows::UI::Xaml::Controls::Image^ getImage() { return wallImage; };
+	double GetArea() { return Area; };
 
 	void setTitle(Platform::String^ title) { this->Title = title; };
 	void setDescription(Platform::String^ desc) { this->Description = desc; };

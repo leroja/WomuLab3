@@ -3,8 +3,6 @@
 
 
 
-
-
 using namespace Platform;
 using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::Geolocation;
@@ -23,6 +21,8 @@ using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
 using namespace concurrency;
+using namespace Windows::ApplicationModel::Background;
+
 
 
 GeoFenceStuff::GeoFenceStuff()
@@ -34,9 +34,25 @@ GeoFenceStuff::~GeoFenceStuff()
 {
 }
 
-Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence()
+Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence(Windows::Storage::StorageFile^ file)
 {
 	Geofence^ geofence = nullptr;
+
+	if (file != nullptr)
+	{
+		create_task(FileIO::ReadTextAsync(file)).then([this, file](task<String^> task)
+		{
+			try
+			{
+				String^ fileContent = task.get();
+
+			}
+			catch (COMException^ ex)
+			{
+
+			}
+		});
+	}
 
 
 	return geofence;
@@ -56,11 +72,97 @@ Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofenc
 			String^ output = file->Name + "\n";
 			OutputDebugString(output->Begin());
 
-			Geofence^ geofence = GenerateGeofence();
+			Geofence^ geofence = GenerateGeofence(file);
+			geofences->InsertAt(0, geofence);
 			
 		}
 	});
 
 	return nullptr;
+	//return list;
+}
 
+void GeoFenceStuff::RegisterBackgroundTask()
+{
+	try
+	{
+		// Get permission for a background task from the user. If the user has already answered once,
+		// this does nothing and the user must manually update their preference via PC Settings.
+		task<BackgroundAccessStatus> requestAccessTask(BackgroundExecutionManager::RequestAccessAsync());
+		requestAccessTask.then([this](BackgroundAccessStatus backgroundAccessStatus)
+		{
+			// Regardless of the answer, register the background task. If the user later adds this application
+			// to the lock screen, the background task will be ready to run.
+
+			// Create a new background task builder
+			BackgroundTaskBuilder^ geofenceTaskBuilder = ref new BackgroundTaskBuilder();
+
+			geofenceTaskBuilder->Name = "GeoBackgroundTask";
+			geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.GeofenceBackgroundTask.";
+
+			// Create a new location trigger
+			auto trigger = ref new LocationTrigger(LocationTriggerType::Geofence);
+
+			// Associate the location trigger with the background task builder
+			geofenceTaskBuilder->SetTrigger(trigger);
+
+			// If it is important that there is user presence and/or
+			// internet connection when OnCompleted is called
+			// the following could be called before calling Register()
+			// SystemCondition^ condition = ref new SystemCondition(SystemConditionType::UserPresent | SystemConditionType::InternetAvailable);
+			// geofenceTaskBuilder->AddCondition(condition);
+
+			// Register the background task
+			geofenceTask = geofenceTaskBuilder->Register();
+
+			// Register for background task completion notifications
+	//		taskCompletedToken = geofenceTask->Completed::add(ref new BackgroundTaskCompletedEventHandler(this, &GeoFenceStuff::OnCompleted));
+
+
+			// Check the background access status of the application and display the appropriate status message
+			switch (backgroundAccessStatus)
+			{
+			case BackgroundAccessStatus::Unspecified:
+			case BackgroundAccessStatus::Denied:
+				//rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
+				//	NotifyType::ErrorMessage);
+				break;
+
+			default:
+				//rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
+
+				// Need tp request access to location
+				// This must be done with background task registeration
+				// because the background task cannot display UI
+				RequestLocationAccess();
+				break;
+			}
+		});
+	}
+	catch (Exception^ ex)
+	{
+		//rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
+
+	}
+}
+
+void GeoFenceStuff::RequestLocationAccess()
+{
+	task<GeolocationAccessStatus> geolocationAccessRequestTask(Windows::Devices::Geolocation::Geolocator::RequestAccessAsync());
+	geolocationAccessRequestTask.then([this](task<GeolocationAccessStatus> accessStatusTask)
+	{
+		auto accessStatus = accessStatusTask.get();
+
+		switch (accessStatus)
+		{
+		case GeolocationAccessStatus::Allowed:
+			break;
+		case GeolocationAccessStatus::Denied:
+			//rootPage->NotifyUser("Access to location is denied.", NotifyType::ErrorMessage);
+			break;
+		case GeolocationAccessStatus::Unspecified:
+			//rootPage->NotifyUser("Unspecified error!", NotifyType::ErrorMessage);
+			break;
+		}
+	});
 }

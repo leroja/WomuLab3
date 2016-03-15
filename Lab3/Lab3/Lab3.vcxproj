@@ -147,6 +147,7 @@
     <ClInclude Include="MainPage.xaml.h">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="RandomStuff.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="RoomChooserView.xaml.h">
       <DependentUpon>RoomChooserView.xaml</DependentUpon>
@@ -213,6 +214,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RandomStuff.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="RoomChooserView.xaml.cpp">
       <DependentUpon>RoomChooserView.xaml</DependentUpon>

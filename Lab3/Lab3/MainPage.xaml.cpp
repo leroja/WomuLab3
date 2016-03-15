@@ -56,11 +56,8 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 			auto Latitude = pos->Coordinate->Point->Position.Latitude;
 			auto Longitude = pos->Coordinate->Point->Position.Longitude;
 
-			/*lati = Latitude;
-			longi = Longitude;*/
 
-
-			Room^ newRoom = ref new Room("TestRum", "Väldigt mycket test", Latitude, Longitude);
+			Room^ newRoom = ref new Room("Room Title", "Room Description", Latitude, Longitude);
 
 
 			this->Frame->Navigate(TypeName(RoomView1::typeid), newRoom);
@@ -74,15 +71,6 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 			
 		}
 	});
-
-
-
-
-
-	Room^ newRoom = ref new Room();
-	
-
-	this->Frame->Navigate(TypeName(RoomView1::typeid), newRoom);
 
 }
 

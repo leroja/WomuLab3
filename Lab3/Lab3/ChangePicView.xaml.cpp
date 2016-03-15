@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "ChangePicView.xaml.h"
 #include "Wall.h"
+#include "WallView1.xaml.h"
 
 using namespace Lab3;
 
@@ -43,7 +44,7 @@ void Lab3::ChangePicView::NewPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);
-			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid), this->wall);
+			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
 		});
 	});
 }
@@ -65,7 +66,7 @@ void Lab3::ChangePicView::OldPic_Click(Platform::Object^ sender, Windows::UI::Xa
 		}
 		concurrency::task<Streams::IRandomAccessStream^>(file->OpenAsync(FileAccessMode::Read)).then([this](Streams::IRandomAccessStream^ stream) {
 			setPic(stream);	
-			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid), this->wall);
+			this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
 		});
 	});
 
@@ -74,7 +75,7 @@ void Lab3::ChangePicView::OldPic_Click(Platform::Object^ sender, Windows::UI::Xa
 
 void Lab3::ChangePicView::Back_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->GoBack();
+	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
 }
 
 void Lab3::ChangePicView::setPic(Windows::Storage::Streams::IRandomAccessStream ^ stream)

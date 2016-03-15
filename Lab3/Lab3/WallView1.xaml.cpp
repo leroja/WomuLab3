@@ -37,11 +37,13 @@ void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
 	{
 		Wall^ newWall = (Wall^)e->Parameter;
 
-		if (wall != nullptr) {
+		if (newWall != nullptr) {
 			this->wall = newWall;
 			this->Title->Text = this->wall->GetTitle();
 			this->Description->Text = this->wall->GetDescription();
-			this->WallImage = this->wall->getImage();
+			if (this->wall->getImage() != nullptr) {
+				this->WallImage->Source = this->wall->getImage()->Source;
+			}
 		}
 		else {
 			wall = ref new Wall();
@@ -99,5 +101,12 @@ void Lab3::WallView1::Home_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
 
 void Lab3::WallView1::ChangePicture_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	Platform::String^ title, ^ description;
+
+	title = Title->Text;
+	description = Description->Text;
+
+	this->wall->setTitle(title);
+	this->wall->setDescription(description);
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(ChangePicView::typeid),wall);
 }

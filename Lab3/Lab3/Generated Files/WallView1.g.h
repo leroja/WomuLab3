@@ -35,6 +35,7 @@ namespace Lab3
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock1;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock;
         private: ::Windows::UI::Xaml::Controls::TextBox^ Title;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock2;

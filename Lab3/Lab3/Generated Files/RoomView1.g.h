@@ -34,6 +34,7 @@ namespace Lab3
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock1;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock;
         private: ::Windows::UI::Xaml::Controls::TextBox^ RoomTitle;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock2;
@@ -46,13 +47,13 @@ namespace Lab3
         private: ::Windows::UI::Xaml::Controls::TextBlock^ RoomVolume;
         private: ::Windows::UI::Xaml::Controls::Button^ SaveButton;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ em;
-        private: ::Windows::UI::Xaml::Controls::Button^ Wall1;
-        private: ::Windows::UI::Xaml::Controls::Button^ Wall2;
-        private: ::Windows::UI::Xaml::Controls::Button^ Wall3;
+        private: ::Windows::UI::Xaml::Controls::Button^ HomeButton;
         private: ::Windows::UI::Xaml::Controls::Button^ Wall4;
         private: ::Windows::UI::Xaml::Controls::Button^ Ceiling;
         private: ::Windows::UI::Xaml::Controls::Button^ Floor;
-        private: ::Windows::UI::Xaml::Controls::Button^ HomeButton;
+        private: ::Windows::UI::Xaml::Controls::Button^ Wall1;
+        private: ::Windows::UI::Xaml::Controls::Button^ Wall2;
+        private: ::Windows::UI::Xaml::Controls::Button^ Wall3;
     };
 }
 

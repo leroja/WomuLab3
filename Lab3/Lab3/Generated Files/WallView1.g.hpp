@@ -29,66 +29,71 @@ void ::Lab3::WallView1::Connect(int __connectionId, ::Platform::Object^ __target
     {
         case 1:
             {
-                this->textBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->textBlock1 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 2:
             {
-                this->Title = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                this->textBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 3:
             {
-                this->textBlock2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->Title = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;
         case 4:
             {
-                this->Description = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                this->textBlock2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 5:
             {
-                this->textBlock4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->Description = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;
         case 6:
             {
-                this->Area = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                this->textBlock4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 7:
             {
-                this->textBlock6 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->Area = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;
         case 8:
+            {
+                this->textBlock6 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 9:
             {
                 this->ChangePicture = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->ChangePicture))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::WallView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WallView1::ChangePicture_Click);
             }
             break;
-        case 9:
+        case 10:
             {
                 this->WallImage = safe_cast<::Windows::UI::Xaml::Controls::Image^>(__target);
             }
             break;
-        case 10:
+        case 11:
             {
                 this->Save = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Save))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::WallView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WallView1::Save_Click);
             }
             break;
-        case 11:
+        case 12:
             {
                 this->Back = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Back))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::WallView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WallView1::Back_Click);
             }
             break;
-        case 12:
+        case 13:
             {
                 this->Home = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Home))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::WallView1::*)

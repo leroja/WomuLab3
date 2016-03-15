@@ -29,113 +29,118 @@ void ::Lab3::RoomView1::Connect(int __connectionId, ::Platform::Object^ __target
     {
         case 1:
             {
-                this->textBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->textBlock1 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 2:
             {
-                this->RoomTitle = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                this->textBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 3:
             {
-                this->textBlock2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->RoomTitle = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;
         case 4:
             {
-                this->RoomDescription = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                this->textBlock2 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 5:
             {
-                this->textBlock4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->RoomDescription = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
             }
             break;
         case 6:
             {
-                this->Latitude = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->textBlock4 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 7:
             {
-                this->textBlock7 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->Latitude = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 8:
             {
-                this->Longitude = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->textBlock7 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 9:
             {
-                this->textBlock6 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->Longitude = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 10:
             {
-                this->RoomVolume = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->textBlock6 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 11:
+            {
+                this->RoomVolume = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 12:
             {
                 this->SaveButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->SaveButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::SaveButton_Click);
             }
             break;
-        case 12:
+        case 13:
             {
                 this->em = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
-        case 13:
-            {
-                this->Wall1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall1))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall1_Click);
-            }
-            break;
         case 14:
             {
-                this->Wall2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall2_Click);
+                this->HomeButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->HomeButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::HomeButton_Click);
             }
             break;
         case 15:
-            {
-                this->Wall3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall3_Click);
-            }
-            break;
-        case 16:
             {
                 this->Wall4 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall4))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall4_Click);
             }
             break;
-        case 17:
+        case 16:
             {
                 this->Ceiling = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Ceiling))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Ceiling_Click);
             }
             break;
-        case 18:
+        case 17:
             {
                 this->Floor = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Floor))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Floor_Click);
             }
             break;
+        case 18:
+            {
+                this->Wall1 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall1))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall1_Click);
+            }
+            break;
         case 19:
             {
-                this->HomeButton = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->HomeButton))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::HomeButton_Click);
+                this->Wall2 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall2))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall2_Click);
+            }
+            break;
+        case 20:
+            {
+                this->Wall3 = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Wall3))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::RoomView1::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&RoomView1::Wall3_Click);
             }
             break;
     }

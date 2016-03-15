@@ -77,7 +77,7 @@ void Lab3::ChangePicView::OldPic_Click(Platform::Object^ sender, Windows::UI::Xa
 
 void Lab3::ChangePicView::Back_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->wall);
+	this->Frame->GoBack();
 }
 
 void Lab3::ChangePicView::setPic(Windows::Storage::Streams::IRandomAccessStream ^ stream)

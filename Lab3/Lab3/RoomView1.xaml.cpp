@@ -24,6 +24,7 @@ using namespace Windows::UI::Xaml::Navigation;
 using namespace std;
 using namespace concurrency;
 using namespace Windows::Storage;
+using namespace Windows::Devices::Geolocation;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -138,4 +139,38 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 	//	});
 	//	//Do something with new file
 	//});
+}
+
+void Lab3::RoomView1::Updatelatlong_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	Geolocator^ geolocator = ref new Geolocator;
+
+	geolocator->DesiredAccuracy = PositionAccuracy::High;
+
+
+	task<Geoposition^> geopositionTask(geolocator->GetGeopositionAsync());
+	geopositionTask.then([this](task<Geoposition^> getPosTask)
+	{
+		try
+		{
+			// Get will throw an exception if the task was canceled or failed with an error
+			Geoposition^ pos = getPosTask.get();
+
+			auto Lati = pos->Coordinate->Point->Position.Latitude;
+			auto Longi = pos->Coordinate->Point->Position.Longitude;
+
+			
+		}
+		catch (task_canceled&)
+		{
+
+		}
+		catch (Exception^ ex)
+		{
+
+		}
+	});
+
+
+
 }

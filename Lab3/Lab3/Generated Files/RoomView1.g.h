@@ -43,6 +43,7 @@ namespace Lab3
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Latitude;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock7;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ Longitude;
+        private: ::Windows::UI::Xaml::Controls::Button^ Updatelatlong;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textBlock6;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ RoomVolume;
         private: ::Windows::UI::Xaml::Controls::Button^ SaveButton;

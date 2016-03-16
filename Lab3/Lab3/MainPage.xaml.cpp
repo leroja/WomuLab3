@@ -56,7 +56,6 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 			auto Latitude = pos->Coordinate->Point->Position.Latitude;
 			auto Longitude = pos->Coordinate->Point->Position.Longitude;
 
-
 			Room^ newRoom = ref new Room("Room Title", "Room Description", Latitude, Longitude);
 
 

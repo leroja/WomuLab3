@@ -21,6 +21,7 @@
                 <TextBlock x:Name="Latitude" TextWrapping="Wrap"/>
                 <TextBlock x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>
                 <TextBlock x:Name="Longitude" TextWrapping="Wrap"/>
+                <Button x:Name="Updatelatlong" Content="Update latitude and longitude" HorizontalAlignment="center" VerticalAlignment="Top" Click="Updatelatlong_Click"/>
                 <TextBlock x:Name="textBlock6" TextWrapping="Wrap" Text="Room Volume"/>
                 <TextBlock x:Name="RoomVolume" TextWrapping="Wrap"/>
                 <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="91,0,71,0" Click="SaveButton_Click"/>

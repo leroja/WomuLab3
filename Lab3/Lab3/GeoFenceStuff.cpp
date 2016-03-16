@@ -53,14 +53,74 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 			}
 		});
 	}
+	
+	//position.Latitude = 0.0; // get from room
+	//position.Longitude = 0.0; // get from room
+	//position.Altitude = 0.0;
+	//double radius = 0.0; // get radius from room
+	//String^ fencekey = ""; // get fencekey from room
 
+	//MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
+	//mask = mask | MonitoredGeofenceStates::Entered;
+	//mask = mask | MonitoredGeofenceStates::Exited;
+
+
+	//Geocircle^ geocircle = ref new Geocircle(position, radius);
+	//TimeSpan dwelltime;
+	//dwelltime.Duration = 1;
+
+	//geofence = ref new Geofence(fencekey, geocircle, mask, false, dwelltime);
+
+
+	// test  /// ta bort 
+	Geolocator^ geolocator = ref new Geolocator;
+
+	BasicGeoposition position;
+	geolocator->DesiredAccuracy = PositionAccuracy::High;
+	task<Geoposition^> geopositionTask(geolocator->GetGeopositionAsync());
+	geopositionTask.then([this, &position, &geofence](task<Geoposition^> getPosTask)
+	{
+		try
+		{
+			// Get will throw an exception if the task was canceled or failed with an error
+			Geoposition^ pos = getPosTask.get();
+
+			auto Lati = pos->Coordinate->Point->Position.Latitude;
+			auto Longi = pos->Coordinate->Point->Position.Longitude;
+			position.Latitude = Lati;
+			position.Longitude = Longi;
+			position.Altitude = 0.0;
+			double radius = 1000.0;
+			String^ fencekey = "test";
+
+			MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
+			mask = mask | MonitoredGeofenceStates::Entered;
+			mask = mask | MonitoredGeofenceStates::Exited;
+
+
+			Geocircle^ geocircle = ref new Geocircle(position, radius);
+			TimeSpan dwelltime;
+			dwelltime.Duration = 1;
+
+			geofence = ref new Geofence(fencekey,geocircle,mask,false,dwelltime);
+
+		}
+		catch (task_canceled&)
+		{
+
+		}
+		catch (Exception^ ex)
+		{
+
+		}
+	});
 
 	return geofence;
 }
 
 Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GeoFenceStuff::GenerateAllGeofences()
 {
-
+	StorageFolder^ roamingFolder = ApplicationData::Current->RoamingFolder;
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 	auto createFileTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
 		//Iterate over the results and print the list of files

@@ -50,8 +50,6 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 			RoomVolume->Text = room->getVolume().ToString();
 			Longitude->Text = room->GetLongitude().ToString();
 			Latitude->Text = room->GetLatitude().ToString();
-
-
 		}
 	}
 	catch (const std::exception&)
@@ -117,13 +115,28 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 {
 	Platform::String^ title, ^ description;
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
-	double Volume = this->room->getVolume();
-
 	title = RoomTitle->Text;
 	description = RoomDescription->Text;
-
 	this->room->setTitle(title);
 	this->room->setDescription(description);
+	String^ filenamn = this->room->GetTitle();
+	concurrency::task<StorageFile^>(localFolder->CreateFileAsync(filenamn, CreationCollisionOption::ReplaceExisting)).then([this](StorageFile^ newFile) {
+		
+		Platform::String^ filestring;
+		filestring += this->room->GetTitle() +"/n";
+		filestring += this->room->GetDescription() + "/n";
+		filestring += this->room->GetLatitude() + "/n";
+		filestring += this->room->GetLongitude() + "/n";
+
+		return FileIO::WriteTextAsync(newFile, filestring);
+	});
+}
+	
+	
+	//double Volume = this->room->getVolume();
+
+
+
 
 
 
@@ -139,7 +152,6 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 	//	});
 	//	//Do something with new file
 	//});
-}
 
 void Lab3::RoomView1::Updatelatlong_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {

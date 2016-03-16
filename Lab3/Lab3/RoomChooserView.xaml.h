@@ -18,6 +18,8 @@ namespace Lab3
 	public:
 		RoomChooserView();
 	private:
+		Platform::Collections::Vector<Platform::String^>^ filenames;
+		Platform::Collections::Vector<Platform::String^>^ getAllfiles();
 		void Home_Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void listBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 	};

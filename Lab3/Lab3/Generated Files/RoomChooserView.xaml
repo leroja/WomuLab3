@@ -14,15 +14,7 @@
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap">
                             <Run FontWeight="Bold">Title: </Run> 
-                            <Run Text="{Binding Title}" />
-                        </TextBlock>
-                        <TextBlock TextWrapping="Wrap">
-                            <Run FontWeight="Bold">Latitude: </Run> 
-                            <Run Text="{Binding Title}" />
-                        </TextBlock>
-                        <TextBlock TextWrapping="Wrap">
-                            <Run FontWeight="Bold">Longitude: </Run> 
-                            <Run Text="{Binding Title}" />
+                            <Run Text="{Binding}" />
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>

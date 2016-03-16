@@ -24,6 +24,8 @@ public:
 
 	void setTitle(Platform::String^ title) { this->Title = title; };
 	void setDescription(Platform::String^ desc) { this->Description = desc; };
+	void setLatitude(double lati) { this->latitude = lati; };
+	void setLongitude(double longi) { this->longitude = longi; };
 
 private:
 	double Volume;

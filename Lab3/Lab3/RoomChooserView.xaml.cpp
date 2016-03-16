@@ -7,9 +7,6 @@
 #include "RoomChooserView.xaml.h"
 #include "MainPage.xaml.h"
 #include "RoomView1.xaml.h"
-#include <list>
-
-#include "GeoFenceStuff.h"
 
 using namespace Lab3;
 
@@ -41,56 +38,22 @@ RoomChooserView::RoomChooserView()
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 
 
-	GeoFenceStuff^ geo = ref new GeoFenceStuff();
-
-	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt", CreationCollisionOption::OpenIfExists)).then([this](StorageFile^ newFile) {
-		double volume = 10;
-		double latitude = 25;
-		double longitude = 122;
-
-		String^ title = "Title: " + "Test";
-		String^ Desc = "Description: " + "TestDesc";
-		String^ Vol = "Volume: " + volume;
-		String^ lat = "Latitude: " + latitude;
-		String^ lon = "Longitude: " + longitude;
-		String^ te = title + Desc + Vol + lat + lon;
-
-		create_task(FileIO::WriteTextAsync(newFile, te)).then([](task<void> task)
-		{
-		
-		});
-	});
-
-
-
-
 	auto getFilesTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
 		//Iterate over the results and print the list of files
 		// to the visual studio output window
 		for (auto it = filesInFolder->First(); it->HasCurrent; it->MoveNext())
 		{
 			StorageFile^ file = it->Current;
-
-			geo->GenerateGeofence(file); /////
-
 			String^ output = file->Name + "\n";
 			OutputDebugString(output->Begin());
 
+
+			// från fil skapa en sträng so
+			// som sedan läggs till i listboxen
+
+			//listBox->Items->Append(t);
 		}
 	});
-
-
-
-
-
-
-	//Room t("hej", "test");
-	//Room t2("hej2", "test");
-	//Room t3("hej3", "test");
-	//Room t4("hej4", "test");
-	
-	//listBox->Items->Append(t);
-
 }
 
 
@@ -103,7 +66,6 @@ void Lab3::RoomChooserView::Home_Button_Click(Platform::Object^ sender, Windows:
 void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
 	Object^ tempSelected = listBox->SelectedItem;
-
 	String^ ayf = listBox->SelectedItem->ToString();
 
 	Room^ selectedRoom;

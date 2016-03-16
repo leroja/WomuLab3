@@ -67,7 +67,7 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 
 	//Geocircle^ geocircle = ref new Geocircle(position, radius);
 	//TimeSpan dwelltime;
-	//dwelltime.Duration = 1;
+	//dwelltime.Duration = 10000000;
 
 	//geofence = ref new Geofence(fencekey, geocircle, mask, false, dwelltime);
 
@@ -100,9 +100,11 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 
 			Geocircle^ geocircle = ref new Geocircle(position, radius);
 			TimeSpan dwelltime;
-			dwelltime.Duration = 1;
+			dwelltime.Duration = 10000000L;
+			
 
 			geofence = ref new Geofence(fencekey,geocircle,mask,false,dwelltime);
+			return geofence;
 
 		}
 		catch (task_canceled&)
@@ -139,70 +141,90 @@ Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofenc
 	});
 
 	return nullptr;
-	//return list;
 }
 
 void GeoFenceStuff::RegisterBackgroundTask()
 {
-	try
+	boolean taskRegistered = false;
+	Platform::String^ exampleTaskName = "GeoBackgroundTask";
+
+	auto iter = BackgroundTaskRegistration::AllTasks->First();
+	auto hascur = iter->HasCurrent;
+
+	while (hascur)
 	{
-		// Get permission for a background task from the user. If the user has already answered once,
-		// this does nothing and the user must manually update their preference via PC Settings.
-		task<BackgroundAccessStatus> requestAccessTask(BackgroundExecutionManager::RequestAccessAsync());
-		requestAccessTask.then([this](BackgroundAccessStatus backgroundAccessStatus)
+		auto cur = iter->Current->Value;
+
+		if (cur->Name == exampleTaskName)
 		{
-			// Regardless of the answer, register the background task. If the user later adds this application
-			// to the lock screen, the background task will be ready to run.
+			taskRegistered = true;
+			break;
+		}
 
-			// Create a new background task builder
-			BackgroundTaskBuilder^ geofenceTaskBuilder = ref new BackgroundTaskBuilder();
-
-			geofenceTaskBuilder->Name = "GeoBackgroundTask";
-			geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.GeofenceBackgroundTask.";
-
-			// Create a new location trigger
-			auto trigger = ref new LocationTrigger(LocationTriggerType::Geofence);
-
-			// Associate the location trigger with the background task builder
-			geofenceTaskBuilder->SetTrigger(trigger);
-
-			// If it is important that there is user presence and/or
-			// internet connection when OnCompleted is called
-			// the following could be called before calling Register()
-			// SystemCondition^ condition = ref new SystemCondition(SystemConditionType::UserPresent | SystemConditionType::InternetAvailable);
-			// geofenceTaskBuilder->AddCondition(condition);
-
-			// Register the background task
-			geofenceTask = geofenceTaskBuilder->Register();
-
-			// Register for background task completion notifications
-	//		taskCompletedToken = geofenceTask->Completed::add(ref new BackgroundTaskCompletedEventHandler(this, &GeoFenceStuff::OnCompleted));
-
-
-			// Check the background access status of the application and display the appropriate status message
-			switch (backgroundAccessStatus)
-			{
-			case BackgroundAccessStatus::Unspecified:
-			case BackgroundAccessStatus::Denied:
-				//rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
-				//	NotifyType::ErrorMessage);
-				break;
-
-			default:
-				//rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
-
-				// Need tp request access to location
-				// This must be done with background task registeration
-				// because the background task cannot display UI
-				RequestLocationAccess();
-				break;
-			}
-		});
+		hascur = iter->MoveNext();
 	}
-	catch (Exception^ ex)
-	{
-		//rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
+	if (taskRegistered) {
 
+	}
+	else
+	{
+
+		try
+		{
+			// Get permission for a background task from the user. If the user has already answered once,
+			// this does nothing and the user must manually update their preference via PC Settings.
+			task<BackgroundAccessStatus> requestAccessTask(BackgroundExecutionManager::RequestAccessAsync());
+			requestAccessTask.then([this](BackgroundAccessStatus backgroundAccessStatus)
+			{
+				
+				// Regardless of the answer, register the background task. If the user later adds this application
+				// to the lock screen, the background task will be ready to run.
+
+				// Create a new background task builder
+				BackgroundTaskBuilder^ geofenceTaskBuilder = ref new BackgroundTaskBuilder();
+
+				geofenceTaskBuilder->Name = "GeoBackgroundTask";
+				geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.GeofenceBackgroundTask";
+
+				// Create a new location trigger
+				auto trigger = ref new LocationTrigger(LocationTriggerType::Geofence);
+
+				// Associate the location trigger with the background task builder
+				geofenceTaskBuilder->SetTrigger(trigger);
+
+
+				// Register the background task
+				geofenceTask = geofenceTaskBuilder->Register();
+
+				// Register for background task completion notifications
+				taskCompletedToken = geofenceTask->Completed::add(ref new BackgroundTaskCompletedEventHandler(this, &GeoFenceStuff::OnCompleted));
+
+
+				// Check the background access status of the application and display the appropriate status message
+				switch (backgroundAccessStatus)
+				{
+				case BackgroundAccessStatus::Unspecified:
+				case BackgroundAccessStatus::Denied:
+					//rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
+					//	NotifyType::ErrorMessage);
+					break;
+
+				default:
+					//rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
+
+					// Need tp request access to location
+					// This must be done with background task registeration
+					// because the background task cannot display UI
+					RequestLocationAccess();
+					break;
+				}
+			});
+		}
+		catch (Exception^ ex)
+		{
+			//rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
+
+		}
 	}
 }
 
@@ -225,4 +247,40 @@ void GeoFenceStuff::RequestLocationAccess()
 			break;
 		}
 	});
+}
+
+void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs^ args)
+{
+	// Update the UI with progress reported by the background task
+	// We need to dispatch to the UI thread to display the output
+	Windows::UI::Core::CoreDispatcher^ Dispatcher;
+	Dispatcher->RunAsync(
+		CoreDispatcherPriority::Normal,
+		ref new DispatchedHandler(
+			[this, args]()
+	{
+		try
+		{
+			// Throw an exception if the background task had an unrecoverable error
+			args->CheckResult();
+
+			// Update the UI with the completion status of the background task
+			auto settings = ApplicationData::Current->LocalSettings->Values;
+			if (settings->HasKey("Status"))
+			{
+			//	rootPage->NotifyUser(safe_cast<String^>(settings->Lookup("Status")), NotifyType::StatusMessage);
+			}
+
+			// add background events to listbox
+		//	FillEventListBoxWithExistingEvents();
+		}
+		catch (Exception^ ex)
+		{
+			// The background task had an error
+		//	rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
+		}
+	},
+			CallbackContext::Any
+		)
+		);
 }

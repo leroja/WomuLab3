@@ -17,7 +17,7 @@
                 <TextBox x:ConnectionId='3' x:Name="Title" TextWrapping="Wrap"/>
                 <TextBlock x:ConnectionId='4' x:Name="textBlock2" TextWrapping="Wrap" Text="Description"/>
                 <TextBox x:ConnectionId='5' x:Name="Description" TextWrapping="Wrap" Height="100"/>
-                <TextBlock x:ConnectionId='6' x:Name="textBlock4" TextWrapping="Wrap" Text="Area (m)"/>
+                <TextBlock x:ConnectionId='6' x:Name="textBlock4" TextWrapping="Wrap" Text="Area (m&#178;)"/>
                 <TextBox x:ConnectionId='7' x:Name="Area" TextWrapping="Wrap"/>
                 <TextBlock x:ConnectionId='8' x:Name="textBlock6" TextWrapping="Wrap" Text="Wall Image"/>
                 <Button x:ConnectionId='9' x:Name="ChangePicture" Content="Change Image"                             HorizontalAlignment="Left"/>

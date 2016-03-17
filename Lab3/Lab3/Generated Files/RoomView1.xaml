@@ -22,7 +22,7 @@
                 <TextBlock x:ConnectionId='8' x:Name="textBlock7" TextWrapping="Wrap" Text="Longitude Coordinate"/>
                 <TextBlock x:ConnectionId='9' x:Name="Longitude" TextWrapping="Wrap"/>
                 <Button x:ConnectionId='10' x:Name="Updatelatlong" Content="Update latitude and longitude" HorizontalAlignment="center" VerticalAlignment="Top"                            />
-                <TextBlock x:ConnectionId='11' x:Name="textBlock6" TextWrapping="Wrap" Text="Room Volume"/>
+                <TextBlock x:ConnectionId='11' x:Name="textBlock6" TextWrapping="Wrap" Text="Room Volume m&#179;"/>
                 <TextBlock x:ConnectionId='12' x:Name="RoomVolume" TextWrapping="Wrap"/>
                 <Button x:ConnectionId='13' x:Name="SaveButton" Content="Save" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="91,0,71,0"                         />
                 <TextBlock x:ConnectionId='14' x:Name="em"/>

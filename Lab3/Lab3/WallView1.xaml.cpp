@@ -72,21 +72,6 @@ void Lab3::WallView1::Save_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
 	this->wall->setTitle(title);
 	this->wall->setDescription(description);
 	this->wall->setArea(area);
-
-
-
-	//Platform::String^ FileName = "namn.end";
-
-	//auto createFileTask = create_task(localFolder->CreateFileAsync(FileName, CreationCollisionOption::ReplaceExisting)).then([](StorageFile^ newFile) {
-
-	//	//temp
-	//	String^ te = "test tets";
-	//	create_task(FileIO::WriteTextAsync(newFile,te)).then([](task<void> task)
-	//	{
-	//	
-	//	});
-	//	//Do something with new file
-	//});
 }
 
 

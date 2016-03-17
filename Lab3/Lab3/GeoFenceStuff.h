@@ -6,15 +6,16 @@ public:
 	virtual ~GeoFenceStuff();
 
 
-	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
+	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
 
 	//Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
 	void RegisterBackgroundTask();
 
 private:
-	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
+	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
 	void RequestLocationAccess();
 	Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
+	void OnCompleted(Windows::ApplicationModel::Background::BackgroundTaskRegistration^ sender, Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs^ e);
 
 	Windows::Foundation::Collections::IVector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ geofences;
 

@@ -195,7 +195,10 @@ void Lab3::RoomView1::Updatelatlong_Click(Platform::Object^ sender, Windows::UI:
 			auto Lati = pos->Coordinate->Point->Position.Latitude;
 			auto Longi = pos->Coordinate->Point->Position.Longitude;
 
-			
+			room->setLatitude(Lati);
+			room->setLongitude(Longi);
+			Longitude->Text = Longi.ToString();
+			Latitude->Text = Lati.ToString();
 		}
 		catch (task_canceled&)
 		{

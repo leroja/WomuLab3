@@ -113,16 +113,9 @@ Platform::Collections::Vector<Platform::String^>^ RoomChooserView::getAllfiles()
 	//	}
 	//});
 
+			// från fil skapa en sträng so
+			// som sedan läggs till i listboxen
 
-
-
-
-
-	//Room t("hej", "test");
-	//Room t2("hej2", "test");
-	//Room t3("hej3", "test");
-	//Room t4("hej4", "test");
-	
 	//listBox->Items->Append(t);
 
 
@@ -136,7 +129,6 @@ void Lab3::RoomChooserView::Home_Button_Click(Platform::Object^ sender, Windows:
 void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
 	Object^ tempSelected = listBox->SelectedItem;
-
 	String^ ayf = listBox->SelectedItem->ToString();
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 	concurrency::task<StorageFile^>(localFolder->GetFileAsync(ayf)).then([this](StorageFile^ testfile) {
@@ -159,7 +151,7 @@ void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, W
 
 	});
 
-	
+
 }
 Platform::String^ RoomChooserView::convertStdString(std::string e) {
 	//return ref new Platform::String(stows(e).c_str());
@@ -190,7 +182,7 @@ Platform::String^ RoomChooserView::convertStdString(std::string e) {
 
 		while (getline(test, tok)) {
 			filerows.push_back(tok);
-		}
+}
 	});
 }*/
 

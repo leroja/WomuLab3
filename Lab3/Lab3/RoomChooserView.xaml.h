@@ -20,6 +20,7 @@ namespace Lab3
 	private:
 		Platform::Collections::Vector<Platform::String^>^ filenames;
 		Platform::Collections::Vector<Platform::String^>^ getAllfiles();
+		Platform::String^ convertStdString(std::string e);
 		void Home_Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void listBox_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 	};

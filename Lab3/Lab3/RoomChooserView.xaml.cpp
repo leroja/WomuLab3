@@ -8,6 +8,12 @@
 #include "MainPage.xaml.h"
 #include "RoomView1.xaml.h"
 #include <list>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
 
 #include "GeoFenceStuff.h"
 
@@ -31,6 +37,7 @@ using namespace Windows::Storage::Streams;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace concurrency;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -131,10 +138,72 @@ void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, W
 	Object^ tempSelected = listBox->SelectedItem;
 
 	String^ ayf = listBox->SelectedItem->ToString();
-
+	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
+	concurrency::task<StorageFile^>(localFolder->GetFileAsync(ayf)).then([this](StorageFile^ testfile) {
+		return FileIO::ReadTextAsync(testfile);
+	}).then([this](concurrency::task<String^> op) {
+	String^ test;	
+	string t1;
+	vector<string> test1;
+	test = op.get();
+	std::wstring fooW(test->Begin());
+	std::string fooA(fooW.begin(), fooW.end());
+	stringstream ss(fooA);
+	while (getline(ss,t1)) {
+		test1.push_back(t1);
+	}
 	Room^ selectedRoom;
-	//selectedRoom = (Room)tempSelected;
+	String^ std = convertStdString(test1[0]);
+	selectedRoom->setTitle(std);
+	//selectedRoom->setTitle(test1[0]);
 
+	});
 
-	this->Frame->Navigate(TypeName(RoomView1::typeid), selectedRoom);
+	
 }
+Platform::String^ RoomChooserView::convertStdString(std::string e) {
+	//return ref new Platform::String(stows(e).c_str());
+	//return(t1);
+	/*{
+		using namespace System::Runtime::InteropServices;
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}*/
+}
+
+
+
+
+
+	/*Concurrency::task<StorageFile^>(localFolder->GetFileAsync(ayf)).then([this](StorageFile^ loadfile) {
+		return FileIO::ReadTextAsync(loadfile);
+	}).then([this](concurrency::task<String^> fileOp) {
+		String^ text;
+		text = fileOp.get();
+		std::wstring fooW(text->Begin());
+		std::string fooA(fooW.begin(), fooW.end());
+
+		vector<string> filerows;
+		stringstream test(fooA);
+		string tok;
+
+		while (getline(test, tok)) {
+			filerows.push_back(tok);
+		}
+	});
+}*/
+
+
+
+
+	//	}
+	//	catch (const std::exception&)
+	//	{
+
+	//	}
+	//	
+
+	//});
+	
+	//selectedRoom = (Room)tempSelected;

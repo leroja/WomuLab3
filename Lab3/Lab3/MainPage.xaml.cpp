@@ -8,6 +8,8 @@
 #include "RoomView1.xaml.h"
 #include "RoomChooserView.xaml.h"
 
+#include "GeoFenceStuff.h"
+
 using namespace Lab3;
 
 using namespace Platform;
@@ -29,11 +31,17 @@ using namespace Windows::Devices::Geolocation::Geofencing;
 using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+MainPage^ MainPage::Current = nullptr;
 
 MainPage::MainPage()
 {
 	InitializeComponent();
 	
+	MainPage::Current = this;
+
+	GeoFenceStuff^ ha = ref new GeoFenceStuff();
+
+	ha->RegisterBackgroundTask();
 }
 
 
@@ -77,4 +85,33 @@ void Lab3::MainPage::NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::
 void Lab3::MainPage::Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomChooserView::typeid));
+}
+
+
+void MainPage::NotifyUser(String^ strMessage, NotifyType type)
+{
+	switch (type)
+	{
+	case NotifyType::StatusMessage:
+		StatusBorder->Background = ref new SolidColorBrush(Windows::UI::Colors::Green);
+		break;
+	case NotifyType::ErrorMessage:
+		StatusBorder->Background = ref new SolidColorBrush(Windows::UI::Colors::Red);
+		break;
+	default:
+		break;
+	}
+	StatusBlock->Text = strMessage;
+
+	// Collapse the StatusBlock if it has no text to conserve real estate.
+	if (StatusBlock->Text != "")
+	{
+		StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Visible;
+		StatusPanel->Visibility = Windows::UI::Xaml::Visibility::Visible;
+	}
+	else
+	{
+		StatusBorder->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+		StatusPanel->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+	}
 }

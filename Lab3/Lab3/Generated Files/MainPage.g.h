@@ -11,6 +11,10 @@ namespace Windows {
     namespace UI {
         namespace Xaml {
             namespace Controls {
+                ref class Frame;
+                ref class StackPanel;
+                ref class TextBlock;
+                ref class Border;
                 ref class Button;
             }
         }
@@ -32,6 +36,11 @@ namespace Lab3
     private:
         bool _contentLoaded;
     
+        private: ::Windows::UI::Xaml::Controls::Frame^ ScenarioFrame;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ StatusPanel;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ StatusLabel;
+        private: ::Windows::UI::Xaml::Controls::Border^ StatusBorder;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ StatusBlock;
         private: ::Windows::UI::Xaml::Controls::Button^ NewRoom;
         private: ::Windows::UI::Xaml::Controls::Button^ Continue;
     };

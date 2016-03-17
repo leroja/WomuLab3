@@ -2,7 +2,7 @@
 #include "GeoFenceStuff.h"
 
 
-
+using namespace Lab3;
 using namespace Platform;
 using namespace Windows::Devices::Enumeration;
 using namespace Windows::Devices::Geolocation;
@@ -24,9 +24,9 @@ using namespace concurrency;
 using namespace Windows::ApplicationModel::Background;
 
 
-
 GeoFenceStuff::GeoFenceStuff()
 {
+	rootPage = MainPage::Current;
 }
 
 
@@ -46,6 +46,28 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 			{
 				String^ fileContent = task.get();
 
+				Geofence^ geofence = nullptr;
+				BasicGeoposition position;
+				position.Latitude = 0.0; // get from room
+				position.Longitude = 0.0; // get from room
+				position.Altitude = 0.0;
+				double radius = 0.0; // get radius from room
+				String^ fencekey = ""; // get fencekey from room
+
+				MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
+				mask = mask | MonitoredGeofenceStates::Entered;
+				mask = mask | MonitoredGeofenceStates::Exited;
+
+
+				Geocircle^ geocircle = ref new Geocircle(position, radius);
+				TimeSpan dwelltime;
+				dwelltime.Duration = 10000000;
+				bool singleUse = false;
+
+				geofence = ref new Geofence(fencekey, geocircle, mask, singleUse, dwelltime);
+
+				return geofence;
+
 			}
 			catch (COMException^ ex)
 			{
@@ -53,71 +75,6 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 			}
 		});
 	}
-	
-	//position.Latitude = 0.0; // get from room
-	//position.Longitude = 0.0; // get from room
-	//position.Altitude = 0.0;
-	//double radius = 0.0; // get radius from room
-	//String^ fencekey = ""; // get fencekey from room
-
-	//MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
-	//mask = mask | MonitoredGeofenceStates::Entered;
-	//mask = mask | MonitoredGeofenceStates::Exited;
-
-
-	//Geocircle^ geocircle = ref new Geocircle(position, radius);
-	//TimeSpan dwelltime;
-	//dwelltime.Duration = 10000000;
-
-	//geofence = ref new Geofence(fencekey, geocircle, mask, false, dwelltime);
-
-
-	// test  /// ta bort 
-	Geolocator^ geolocator = ref new Geolocator;
-
-	BasicGeoposition position;
-	geolocator->DesiredAccuracy = PositionAccuracy::High;
-	task<Geoposition^> geopositionTask(geolocator->GetGeopositionAsync());
-	geopositionTask.then([this, &position, &geofence](task<Geoposition^> getPosTask)
-	{
-		try
-		{
-			// Get will throw an exception if the task was canceled or failed with an error
-			Geoposition^ pos = getPosTask.get();
-
-			auto Lati = pos->Coordinate->Point->Position.Latitude;
-			auto Longi = pos->Coordinate->Point->Position.Longitude;
-			position.Latitude = Lati;
-			position.Longitude = Longi;
-			position.Altitude = 0.0;
-			double radius = 1000.0;
-			String^ fencekey = "test";
-
-			MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
-			mask = mask | MonitoredGeofenceStates::Entered;
-			mask = mask | MonitoredGeofenceStates::Exited;
-
-
-			Geocircle^ geocircle = ref new Geocircle(position, radius);
-			TimeSpan dwelltime;
-			dwelltime.Duration = 10000000L;
-			
-
-			geofence = ref new Geofence(fencekey,geocircle,mask,false,dwelltime);
-			return geofence;
-
-		}
-		catch (task_canceled&)
-		{
-
-		}
-		catch (Exception^ ex)
-		{
-
-		}
-	});
-
-	return geofence;
 }
 
 Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GeoFenceStuff::GenerateAllGeofences()
@@ -184,6 +141,7 @@ void GeoFenceStuff::RegisterBackgroundTask()
 				BackgroundTaskBuilder^ geofenceTaskBuilder = ref new BackgroundTaskBuilder();
 
 				geofenceTaskBuilder->Name = "GeoBackgroundTask";
+				//geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.Background";
 				geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.GeofenceBackgroundTask";
 
 				// Create a new location trigger
@@ -205,12 +163,12 @@ void GeoFenceStuff::RegisterBackgroundTask()
 				{
 				case BackgroundAccessStatus::Unspecified:
 				case BackgroundAccessStatus::Denied:
-					//rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
-					//	NotifyType::ErrorMessage);
+					rootPage->NotifyUser("Not able to run in background. Application must be added to the lock screen.",
+						NotifyType::ErrorMessage);
 					break;
 
 				default:
-					//rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
+					rootPage->NotifyUser("Background task registered.", NotifyType::StatusMessage);
 
 					// Need tp request access to location
 					// This must be done with background task registeration
@@ -222,7 +180,7 @@ void GeoFenceStuff::RegisterBackgroundTask()
 		}
 		catch (Exception^ ex)
 		{
-			//rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
+			rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
 
 		}
 	}
@@ -240,10 +198,10 @@ void GeoFenceStuff::RequestLocationAccess()
 		case GeolocationAccessStatus::Allowed:
 			break;
 		case GeolocationAccessStatus::Denied:
-			//rootPage->NotifyUser("Access to location is denied.", NotifyType::ErrorMessage);
+			rootPage->NotifyUser("Access to location is denied.", NotifyType::ErrorMessage);
 			break;
 		case GeolocationAccessStatus::Unspecified:
-			//rootPage->NotifyUser("Unspecified error!", NotifyType::ErrorMessage);
+			rootPage->NotifyUser("Unspecified error!", NotifyType::ErrorMessage);
 			break;
 		}
 	});
@@ -268,7 +226,7 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 			auto settings = ApplicationData::Current->LocalSettings->Values;
 			if (settings->HasKey("Status"))
 			{
-			//	rootPage->NotifyUser(safe_cast<String^>(settings->Lookup("Status")), NotifyType::StatusMessage);
+				rootPage->NotifyUser(safe_cast<String^>(settings->Lookup("Status")), NotifyType::StatusMessage);
 			}
 
 			// add background events to listbox
@@ -277,7 +235,7 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 		catch (Exception^ ex)
 		{
 			// The background task had an error
-		//	rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
+			rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
 		}
 	},
 			CallbackContext::Any

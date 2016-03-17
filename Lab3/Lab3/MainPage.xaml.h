@@ -9,8 +9,16 @@
 
 namespace Lab3
 {
+	public enum class NotifyType
+	{
+		StatusMessage,
+		ErrorMessage
+	};
+
+
+
 	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
+	///
 	/// </summary>
 	public ref class MainPage sealed
 	{
@@ -21,5 +29,8 @@ namespace Lab3
 		void NewRoom_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Continue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
+	internal:
+		static MainPage^ Current;
+		void NotifyUser(Platform::String^ strMessage, NotifyType type);
 	};
 }

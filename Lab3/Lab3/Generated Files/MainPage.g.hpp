@@ -29,12 +29,37 @@ void ::Lab3::MainPage::Connect(int __connectionId, ::Platform::Object^ __target)
     {
         case 1:
             {
+                this->ScenarioFrame = safe_cast<::Windows::UI::Xaml::Controls::Frame^>(__target);
+            }
+            break;
+        case 2:
+            {
+                this->StatusPanel = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 3:
+            {
+                this->StatusLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 4:
+            {
+                this->StatusBorder = safe_cast<::Windows::UI::Xaml::Controls::Border^>(__target);
+            }
+            break;
+        case 5:
+            {
+                this->StatusBlock = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 6:
+            {
                 this->NewRoom = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->NewRoom))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::MainPage::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&MainPage::NewRoom_Click);
             }
             break;
-        case 2:
+        case 7:
             {
                 this->Continue = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Continue))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::MainPage::*)

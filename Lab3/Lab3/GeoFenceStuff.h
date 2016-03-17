@@ -1,4 +1,8 @@
 #pragma once
+
+#include "MainPage.xaml.h"
+#include "pch.h"
+
 ref class GeoFenceStuff sealed
 {
 public:
@@ -21,5 +25,6 @@ private:
 
 	Windows::ApplicationModel::Background::BackgroundTaskRegistration^ geofenceTask;
 	Windows::Foundation::EventRegistrationToken taskCompletedToken;
+	Lab3::MainPage^ rootPage;
 };
 

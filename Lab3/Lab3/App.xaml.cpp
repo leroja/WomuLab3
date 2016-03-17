@@ -6,6 +6,8 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 
+#include "GeoFenceStuff.h"
+
 using namespace Lab3;
 
 using namespace Platform;
@@ -30,6 +32,10 @@ App::App()
 {
 	InitializeComponent();
 	Suspending += ref new SuspendingEventHandler(this, &App::OnSuspending);
+
+	//GeoFenceStuff^ ha = ref new GeoFenceStuff();
+
+	//ha->RegisterBackgroundTask();
 }
 
 /// <summary>

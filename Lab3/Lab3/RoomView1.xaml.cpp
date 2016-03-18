@@ -44,7 +44,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 	{
 		Room^ room = (Room^)e->Parameter;
 		App^ thisApp = (App^)Application::Current;
-		thisApp->currentWall = 0;
+
 		if (room != nullptr) {
 			this->room = room;
 			RoomTitle->Text = room->GetTitle();
@@ -53,7 +53,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 			Longitude->Text = room->GetLongitude().ToString();
 			Latitude->Text = room->GetLatitude().ToString();
 		}
-		thisApp->curentRoom = this->room;
+		thisApp->curentRoom = room;
 	}
 	catch (const std::exception&)
 	{

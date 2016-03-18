@@ -65,7 +65,7 @@ Platform::Collections::Vector<Platform::String^>^ RoomChooserView::getAllfiles()
 	});
 	return nullptr;
 }
-
+	
 
 void Lab3::RoomChooserView::Home_Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
@@ -81,19 +81,19 @@ void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, W
 	concurrency::task<StorageFile^>(localFolder->GetFileAsync(ayf)).then([this](StorageFile^ testfile) {
 		return FileIO::ReadTextAsync(testfile);
 	}).then([this](concurrency::task<String^> op) {
-		String^ test;	
-		string t1;
-		vector<string> test1;
-		test = op.get();
-		std::wstring fooW(test->Begin());
-		std::string fooA(fooW.begin(), fooW.end());
-		stringstream ss(fooA);
-		while (getline(ss,t1)) {
-			test1.push_back(t1);
-		}
+	String^ test;	
+	string t1;
+	vector<string> test1;
+	test = op.get();
+	std::wstring fooW(test->Begin());
+	std::string fooA(fooW.begin(), fooW.end());
+	stringstream ss(fooA);
+	while (getline(ss,t1)) {
+		test1.push_back(t1);
+	}
 		Room^ selectedRoom = ref new Room();
 
-		
+
 		selectedRoom->setTitle(convertStdString(test1[0]));
 		selectedRoom->setDescription(convertStdString(test1[1]));
 		selectedRoom->setLatitude(::atof(test1[2].c_str()));
@@ -139,5 +139,5 @@ Platform::String^ RoomChooserView::convertStdString(std::string e) {
 
 	const wchar_t* wchart = widestr.c_str();
 	return ref new String(wchart);
-
+	
 }

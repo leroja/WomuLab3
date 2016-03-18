@@ -111,7 +111,7 @@ void Lab3::WallView1::ChangePicture_Click(Platform::Object^ sender, Windows::UI:
 }
 
 void Lab3::WallView1::acel(void){
-	meter->ReportInterval = 10000;
+	meter->ReportInterval = 300;
 	readingTokenOriginal = meter->ReadingChanged += ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &WallView1::ReadingChangedOriginal);
 
 
@@ -126,27 +126,136 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 		case 1:
 			if (test->AccelerationX > 0.5) {
 				Wall^ free;
+				thisApp->currentWall = 4;
 				free = thisApp->curentRoom->GetWall4();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
 				break;
 			}
 			else if (test->AccelerationX < -0.5) {
 				Wall^ free;
+				thisApp->currentWall = 2;
 				free = thisApp->curentRoom->GetWall2();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 5;
+				free = thisApp->curentRoom->GetCeiling();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 6;
+				free = thisApp->curentRoom->GetFloor();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
 				break;
 			}
 				break;
 		case 2:
+			if (test->AccelerationX > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 1;
+				free = thisApp->curentRoom->GetWall1();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 3;
+				free = thisApp->curentRoom->GetWall3();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 5;
+				free = thisApp->curentRoom->GetCeiling();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 6;
+				free = thisApp->curentRoom->GetFloor();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			break;
 
 		case 3:
+			if (test->AccelerationX > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 2;
+				free = thisApp->curentRoom->GetWall2();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 4;
+				free = thisApp->curentRoom->GetWall4();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 5;
+				free = thisApp->curentRoom->GetCeiling();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5, test->AccelerationY > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 6;
+				free = thisApp->curentRoom->GetFloor();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			break;
 
 		case 4:
+			if (test->AccelerationX > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 3;
+				free = thisApp->curentRoom->GetWall3();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 1;
+				free = thisApp->curentRoom->GetWall1();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5 && test->AccelerationY < -0.5) {
+				Wall^ free;
+				thisApp->currentWall = 5;
+				free = thisApp->curentRoom->GetCeiling();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			else if (test->AccelerationX < 0.5 && test->AccelerationX >-0.5 && test->AccelerationY > 0.5) {
+				Wall^ free;
+				thisApp->currentWall = 6;
+				free = thisApp->curentRoom->GetFloor();
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
+				break;
+			}
+			break;
 
-		case 5:
-
+	/*	case 5:
+			if (test->AccelerationY > -0.8 && test->AccelerationY < -0.3 &&test->AccelerationY > 0.3 && test->AccelerationY < 0.8) {
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomView1::typeid),thisApp->curentRoom);
+				break;
+			}
 		case 6:
-
+			if (test->AccelerationY > -0.8 && test->AccelerationY < -0.3 && test->AccelerationY > 0.3 && test->AccelerationY < 0.8) {
+				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomView1::typeid), thisApp->curentRoom);
+				break;
+			}*/
 		default:
 			break;
 		}

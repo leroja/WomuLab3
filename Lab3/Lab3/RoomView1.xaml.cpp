@@ -43,7 +43,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 	{
 		Room^ room = (Room^)e->Parameter;
 		App^ thisApp = (App^)Application::Current;
-
+		thisApp->currentWall = 0;
 		if (room != nullptr) {
 			this->room = room;
 			RoomTitle->Text = room->GetTitle();
@@ -71,12 +71,16 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 
 void Lab3::RoomView1::Floor_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 6;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetFloor());
 }
 
 
 void Lab3::RoomView1::Ceiling_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 5;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetCeiling());
 }
 

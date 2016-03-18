@@ -10,14 +10,8 @@ public:
 	GeoFenceStuff();
 	virtual ~GeoFenceStuff();
 
-
-	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
-
-	//void GenerateAllGeofences();
 	void RegisterBackgroundTask();
 	void addGeofence(Room^ room);
-
-	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
 
 private:
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(std::vector<std::string> vec);

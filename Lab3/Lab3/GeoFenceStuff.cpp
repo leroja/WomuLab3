@@ -169,15 +169,12 @@ void GeoFenceStuff::RegisterBackgroundTask()
 		hascur = iter->MoveNext();
 	}
 	if (taskRegistered) {
-	//	FillEventListBoxWithExistingEvents();
 		GenerateAllGeofences();
 
-		// Register for background task completion notifications
 		taskCompletedToken = geofenceTask->Completed::add(ref new BackgroundTaskCompletedEventHandler(this, &GeoFenceStuff::OnCompleted));
 
 		try
 		{
-			// Check the background access status of the application and display the appropriate status message
 			switch (BackgroundExecutionManager::GetAccessStatus())
 			{
 			case BackgroundAccessStatus::Unspecified:
@@ -195,8 +192,6 @@ void GeoFenceStuff::RegisterBackgroundTask()
 			OutputDebugString(ex->ToString()->Begin());
 			rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
 		}
-
-		//UpdateButtonStates(/*registered:*/ true);
 	}
 	else
 	{
@@ -209,24 +204,16 @@ void GeoFenceStuff::RegisterBackgroundTask()
 			requestAccessTask.then([this](BackgroundAccessStatus backgroundAccessStatus)
 			{
 				
-				// Regardless of the answer, register the background task. If the user later adds this application
-				// to the lock screen, the background task will be ready to run.
-
-				// Create a new background task builder
 				BackgroundTaskBuilder^ geofenceTaskBuilder = ref new BackgroundTaskBuilder();
 
 				geofenceTaskBuilder->Name = "GeoBackgroundTask";
-				//geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.Background";
 				geofenceTaskBuilder->TaskEntryPoint = "BackgroundTask.GeofenceBackgroundTask";
 
-				// Create a new location trigger
 				auto trigger = ref new LocationTrigger(LocationTriggerType::Geofence);
 
-				// Associate the location trigger with the background task builder
 				geofenceTaskBuilder->SetTrigger(trigger);
 
 
-				// Register the background task
 				geofenceTask = geofenceTaskBuilder->Register();
 
 				// Register for background task completion notifications
@@ -331,8 +318,6 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 			}
 
 			// do app work here
-			// add background events to listbox
-		//	FillEventListBoxWithExistingEvents();
 		}
 		catch (Exception^ ex)
 		{
@@ -340,10 +325,7 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 			rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
 			OutputDebugString(ex->ToString()->Begin());
 		}
-	},
-			CallbackContext::Any
-		)
-		);
+	}, CallbackContext::Any));
 }
 
 
@@ -352,5 +334,4 @@ Platform::String^ GeoFenceStuff::convertStdString(std::string e) {
 
 	const wchar_t* wchart = widestr.c_str();
 	return ref new String(wchart);
-
 }

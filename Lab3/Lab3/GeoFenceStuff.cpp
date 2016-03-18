@@ -24,7 +24,7 @@ using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
-using namespace concurrency;
+using namespace Concurrency;
 using namespace Windows::ApplicationModel::Background;
 using namespace std;
 
@@ -40,59 +40,38 @@ GeoFenceStuff::~GeoFenceStuff()
 {
 }
 
-Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence(Windows::Storage::StorageFile^ file)
+Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence(std::vector<std::string> vec)
 {
-	Geofence^ geofence = nullptr;
-
-	if (file != nullptr)
-	{
-		create_task(FileIO::ReadTextAsync(file)).then([this, file](task<String^> task)
-		{
-			try
-			{
-				String^ fileContent = task.get();
-
-				string t1;
-				vector<string> test1;
-				std::wstring fooW(fileContent->Begin());
-				std::string fooA(fooW.begin(), fooW.end());
-				stringstream ss(fooA);
-				while (getline(ss, t1)) {
-					test1.push_back(t1);
-				}
 
 
-				Geofence^ geofence;
-				BasicGeoposition position;
-				position.Latitude = ::atof(test1[2].c_str());
-				position.Longitude = ::atof(test1[3].c_str());
-				position.Altitude = 0.0;
-				double temp = ::atof(test1[26].c_str());
-				double radius = (sqrt(temp)) / 1.5;
-				String^ fencekey = convertStdString(test1[0]);
+		Geofence^ geofence;
+		BasicGeoposition position;
+		position.Latitude = ::atof(vec[2].c_str());
+		position.Longitude = ::atof(vec[3].c_str());
+		position.Altitude = 0.0;
+		double temp = ::atof(vec[26].c_str());
+		double radius;
+		if (temp == 0) {
+			radius = 100;
+		}
+		else {
+			radius = (sqrt(temp)) / 1.5;
+		}
+		String^ fencekey = convertStdString(vec[0]);
 
-				MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
-				mask = mask | MonitoredGeofenceStates::Entered;
-				mask = mask | MonitoredGeofenceStates::Exited;
+		MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
+		mask = mask | MonitoredGeofenceStates::Entered;
+		mask = mask | MonitoredGeofenceStates::Exited;
 
 
-				Geocircle^ geocircle = ref new Geocircle(position, radius);
-				TimeSpan dwelltime;
-				dwelltime.Duration = 10000000;
-				bool singleUse = false;
+		Geocircle^ geocircle = ref new Geocircle(position, radius);
+		TimeSpan dwelltime;
+		dwelltime.Duration = 10000000;
+		bool singleUse = false;
 
-				geofence = ref new Geofence(fencekey, geocircle, mask, singleUse, dwelltime);
+		geofence = ref new Geofence(fencekey, geocircle, mask, singleUse, dwelltime);
 
-				return geofence;
-
-			}
-			catch (COMException^ ex)
-			{
-
-			}
-		});
-	}
-	return geofence;
+		return geofence;
 }
 
 Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence(Room ^ room)
@@ -105,7 +84,13 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 		position.Latitude = room->GetLatitude();
 		position.Longitude = 0.0; room->GetLongitude();
 		position.Altitude = 0.0;
-		double radius = (sqrt(room->GetFloor()->GetArea()))/1.5;
+		double radius;
+		if (room->GetFloor() == nullptr || room->GetFloor()->GetArea() == 0 ) {
+			radius = 100;
+		}
+		else {
+			radius = (sqrt(room->GetFloor()->GetArea())) / 1.5;
+		}
 		String^ fencekey = room->GetTitle();
 
 		MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
@@ -125,24 +110,41 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 	return geofence;
 }
 
-Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GeoFenceStuff::GenerateAllGeofences()
+void GeoFenceStuff::GenerateAllGeofences()
 {
-	//StorageFolder^ roamingFolder = ApplicationData::Current->RoamingFolder;
 
 	geofences->Clear();
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 	auto createFileTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
 		for (auto it = filesInFolder->First(); it->HasCurrent; it->MoveNext())
 		{
-			StorageFile^ file = it->Current;
-			Geofence^ geofence = GenerateGeofence(file);
 
-			geofences->InsertAt(0, geofence);
-			
+			create_task(FileIO::ReadTextAsync(it->Current)).then([this](task<String^> task)
+			{
+				try
+				{
+					String^ fileContent = task.get();
+
+					string t1;
+					vector<string> test1;
+					std::wstring fooW(fileContent->Begin());
+					std::string fooA(fooW.begin(), fooW.end());
+					stringstream ss(fooA);
+					while (getline(ss, t1)) {
+						test1.push_back(t1);
+					}
+
+					Geofence^ geofence = GenerateGeofence(test1);
+
+					geofences->InsertAt(0, geofence);
+				}
+				catch (COMException^ ex)
+				{
+					OutputDebugString(ex->ToString()->Begin());
+				}
+			});			
 		}
 	});
-
-	return nullptr;
 }
 
 void GeoFenceStuff::RegisterBackgroundTask()
@@ -160,13 +162,41 @@ void GeoFenceStuff::RegisterBackgroundTask()
 		if (cur->Name == exampleTaskName)
 		{
 			taskRegistered = true;
+			geofenceTask = safe_cast<BackgroundTaskRegistration^>(cur);
 			break;
 		}
 
 		hascur = iter->MoveNext();
 	}
 	if (taskRegistered) {
+	//	FillEventListBoxWithExistingEvents();
+		GenerateAllGeofences();
 
+		// Register for background task completion notifications
+		taskCompletedToken = geofenceTask->Completed::add(ref new BackgroundTaskCompletedEventHandler(this, &GeoFenceStuff::OnCompleted));
+
+		try
+		{
+			// Check the background access status of the application and display the appropriate status message
+			switch (BackgroundExecutionManager::GetAccessStatus())
+			{
+			case BackgroundAccessStatus::Unspecified:
+			case BackgroundAccessStatus::Denied:
+				rootPage->NotifyUser("Not able to run in background.", NotifyType::ErrorMessage);
+				break;
+
+			default:
+				rootPage->NotifyUser("Background task is already registered. Waiting for next update...", NotifyType::StatusMessage);
+				break;
+			}
+		}
+		catch (Exception^ ex)
+		{
+			OutputDebugString(ex->ToString()->Begin());
+			rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
+		}
+
+		//UpdateButtonStates(/*registered:*/ true);
 	}
 	else
 	{
@@ -221,14 +251,40 @@ void GeoFenceStuff::RegisterBackgroundTask()
 					RequestLocationAccess();
 					break;
 				}
+				GenerateAllGeofences();
 			});
 		}
 		catch (Exception^ ex)
 		{
 			rootPage->NotifyUser(ex->ToString(), NotifyType::ErrorMessage);
-
+			OutputDebugString(ex->ToString()->Begin());
 		}
 	}
+}
+
+void GeoFenceStuff::addGeofence(Room ^ room)
+{
+
+	String^ title = room->GetTitle();
+	bool exists;
+	unsigned int index = 0;
+	Windows::Foundation::Collections::IVector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ vec = geofences;
+	Platform::Collections::Vector<Platform::String^>^ geofencesID = ref new Platform::Collections::Vector<Platform::String^>();
+
+	for each (auto var in vec)
+	{
+		geofencesID->Append(var->Id);
+	}
+
+	exists = geofencesID->IndexOf(title, &index);
+	
+	if (exists)
+	{
+		geofences->RemoveAt(index);
+	}
+	Geofence^ geo = GenerateGeofence(room);
+
+	geofences->InsertAt(0, geo);
 }
 
 void GeoFenceStuff::RequestLocationAccess()
@@ -274,6 +330,7 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 				rootPage->NotifyUser(safe_cast<String^>(settings->Lookup("Status")), NotifyType::StatusMessage);
 			}
 
+			// do app work here
 			// add background events to listbox
 		//	FillEventListBoxWithExistingEvents();
 		}
@@ -281,6 +338,7 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 		{
 			// The background task had an error
 			rootPage->NotifyUser(ex->Message, NotifyType::ErrorMessage);
+			OutputDebugString(ex->ToString()->Begin());
 		}
 	},
 			CallbackContext::Any

@@ -8,6 +8,7 @@
 #include "MainPage.xaml.h"
 #include "WallView1.xaml.h"
 #include "Room.h"
+#include "GeoFenceStuff.h"
 
 using namespace Lab3;
 
@@ -157,7 +158,13 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 		filestring += this->room->GetFloor()->GetArea() + "\n";
 		filestring += "..." + "\n"; //for pic filepath
 
-		return FileIO::WriteTextAsync(newFile, filestring);
+		//return FileIO::WriteTextAsync(newFile, filestring);
+
+		create_task(FileIO::WriteTextAsync(newFile, filestring)).then([this](task<void> task) {
+			GeoFenceStuff^ ge = ref new GeoFenceStuff();
+
+			ge->addGeofence(room);
+		});
 	});
 }
 	

@@ -16,6 +16,9 @@ public:
 	//Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
 	void RegisterBackgroundTask();
 
+
+	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
+
 private:
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
@@ -28,5 +31,10 @@ private:
 	Windows::ApplicationModel::Background::BackgroundTaskRegistration^ geofenceTask;
 	Windows::Foundation::EventRegistrationToken taskCompletedToken;
 	Lab3::MainPage^ rootPage;
+
+
+
+
+	Platform::String^ convertStdString(std::string e);
 };
 

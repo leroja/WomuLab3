@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "GeoFenceStuff.h"
 #include <cmath>
-#include "RandomStuff.h"
 
 #include <string>
 #include <vector>
@@ -51,7 +50,6 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 		{
 			try
 			{
-				RandomStuff^ rs = ref new RandomStuff();
 				String^ fileContent = task.get();
 
 				string t1;
@@ -71,7 +69,7 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 				position.Altitude = 0.0;
 				double temp = ::atof(test1[26].c_str());
 				double radius = (sqrt(temp)) / 1.5;
-				String^ fencekey = rs->convertStdString(test1[0]);
+				String^ fencekey = convertStdString(test1[0]);
 
 				MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
 				mask = mask | MonitoredGeofenceStates::Entered;
@@ -288,4 +286,13 @@ void GeoFenceStuff::OnCompleted(BackgroundTaskRegistration^ task, Windows::Appli
 			CallbackContext::Any
 		)
 		);
+}
+
+
+Platform::String^ GeoFenceStuff::convertStdString(std::string e) {
+	std::wstring widestr = std::wstring(e.begin(), e.end());
+
+	const wchar_t* wchart = widestr.c_str();
+	return ref new String(wchart);
+
 }

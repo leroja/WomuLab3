@@ -246,7 +246,7 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			}
 			break;
 
-		case 5:
+	/*	case 5:
 			if (test->AccelerationY > -0.8 && test->AccelerationY < -0.3 &&test->AccelerationY > 0.3 && test->AccelerationY < 0.8) {
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomView1::typeid),thisApp->curentRoom);
 				break;
@@ -255,7 +255,7 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			if (test->AccelerationY > -0.8 && test->AccelerationY < -0.3 && test->AccelerationY > 0.3 && test->AccelerationY < 0.8) {
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(RoomView1::typeid), thisApp->curentRoom);
 				break;
-			}
+			}*/
 		default:
 			break;
 		}

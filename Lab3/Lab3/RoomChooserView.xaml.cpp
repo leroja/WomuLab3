@@ -162,6 +162,7 @@ Platform::String^ RoomChooserView::convertStdString(std::string e) {
 		os = chars;
 		Marshal::FreeHGlobal(IntPtr((void*)chars));
 	}*/
+	return nullptr;
 }
 
 

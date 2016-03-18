@@ -99,6 +99,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 		Window::Current->Activate();
 	}
 }
+Windows::Devices::Sensors::Magnetometer;
 
 /// <summary>
 /// Invoked when application execution is being suspended.	Application state is saved

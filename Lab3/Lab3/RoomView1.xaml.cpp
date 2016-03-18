@@ -42,6 +42,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 	try
 	{
 		Room^ room = (Room^)e->Parameter;
+		App^ thisApp = (App^)Application::Current;
 
 		if (room != nullptr) {
 			this->room = room;
@@ -51,6 +52,7 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 			Longitude->Text = room->GetLongitude().ToString();
 			Latitude->Text = room->GetLatitude().ToString();
 		}
+		thisApp->curentRoom = this->room;
 	}
 	catch (const std::exception&)
 	{
@@ -82,24 +84,32 @@ void Lab3::RoomView1::Ceiling_Click(Platform::Object^ sender, Windows::UI::Xaml:
 
 void Lab3::RoomView1::Wall4_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 4;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetWall4());
 }
 
 
 void Lab3::RoomView1::Wall3_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 3;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetWall3());
 }
 
 
 void Lab3::RoomView1::Wall2_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 2;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetWall2());
 }
 
 
 void Lab3::RoomView1::Wall1_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	App^ thisApp = (App^)Application::Current;
+	thisApp->currentWall = 1;
 	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), this->room->GetWall1());
 }
 

@@ -13,17 +13,17 @@ public:
 
 	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
 
-	//Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
+	//void GenerateAllGeofences();
 	void RegisterBackgroundTask();
-
+	void addGeofence(Room^ room);
 
 	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
 
 private:
-	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
+	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(std::vector<std::string> vec);
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
 	void RequestLocationAccess();
-	Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
+	void GenerateAllGeofences();
 	void OnCompleted(Windows::ApplicationModel::Background::BackgroundTaskRegistration^ sender, Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs^ e);
 
 	Windows::Foundation::Collections::IVector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ geofences;

@@ -47,7 +47,6 @@ namespace Lab3
         private: ::Windows::UI::Xaml::Controls::Image^ WallImage;
         private: ::Windows::UI::Xaml::Controls::Button^ Save;
         private: ::Windows::UI::Xaml::Controls::Button^ Back;
-        private: ::Windows::UI::Xaml::Controls::Button^ Home;
     };
 }
 

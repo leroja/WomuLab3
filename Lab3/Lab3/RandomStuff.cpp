@@ -13,52 +13,10 @@ RandomStuff::~RandomStuff()
 }
 
 
+Platform::String^ RandomStuff::convertStdString(std::string e) {
+	std::wstring widestr = std::wstring(e.begin(), e.end());
 
-Platform::String ^ RandomStuff::GenerateSaveString(Room ^ room)
-{
-	String^ returnString;
-	String^ Wall1, ^Wall2, ^Wall3, ^Wall4, ^ceiling,^ floor,^ Volume,^ longitude,^ latitude,^ title,^ desc;
+	const wchar_t* wchart = widestr.c_str();
+	return ref new String(wchart);
 
-
-
-	Wall1 = WallString(room->GetWall1()); 
-	Wall2 = WallString(room->GetWall2());
-	Wall3 = WallString(room->GetWall3());
-	Wall4 = WallString(room->GetWall4());
-	ceiling = WallString(room->GetCeiling());
-	floor = WallString(room->GetFloor());
-
-	return returnString;
-}
-
-Platform::String ^ RandomStuff::GeneratePicPath(Room ^ room, Wall ^ wall)
-{
-	String^ l;
-
-
-
-	return  l;
-}
-
-Platform::String ^ RandomStuff::WallString(Wall ^ wall)
-{
-	String^ wallStr, ^ title, ^desc, ^area,^picPath;
-	if (wall != nullptr)
-	{
-		
-//		picPath = GeneratePicPath();
-		double ar = wall->GetArea();
-		area = "" + ar;
-		title = wall->GetTitle();
-		desc = wall->GetDescription();
-
-		wallStr = title + "\n" + desc + "\n" + area + "\n" + picPath + "\n";
-	}
-	else
-	{
-		wallStr = "WallNullptr";
-	}
-
-
-	return wallStr;
 }

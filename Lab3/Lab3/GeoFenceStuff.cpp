@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "GeoFenceStuff.h"
+#include <cmath>
+#include "RandomStuff.h"
 
+#include <string>
+#include <vector>
+#include <sstream>
 
 using namespace Lab3;
 using namespace Platform;
@@ -22,11 +27,13 @@ using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
 using namespace concurrency;
 using namespace Windows::ApplicationModel::Background;
+using namespace std;
 
 
 GeoFenceStuff::GeoFenceStuff()
 {
 	rootPage = MainPage::Current;
+	geofences = GeofenceMonitor::Current->Geofences;
 }
 
 
@@ -44,15 +51,27 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 		{
 			try
 			{
+				RandomStuff^ rs = ref new RandomStuff();
 				String^ fileContent = task.get();
 
-				Geofence^ geofence = nullptr;
+				string t1;
+				vector<string> test1;
+				std::wstring fooW(fileContent->Begin());
+				std::string fooA(fooW.begin(), fooW.end());
+				stringstream ss(fooA);
+				while (getline(ss, t1)) {
+					test1.push_back(t1);
+				}
+
+
+				Geofence^ geofence;
 				BasicGeoposition position;
-				position.Latitude = 0.0; // get from room
-				position.Longitude = 0.0; // get from room
+				position.Latitude = ::atof(test1[2].c_str());
+				position.Longitude = ::atof(test1[3].c_str());
 				position.Altitude = 0.0;
-				double radius = 0.0; // get radius from room
-				String^ fencekey = ""; // get fencekey from room
+				double temp = ::atof(test1[26].c_str());
+				double radius = (sqrt(temp)) / 1.5;
+				String^ fencekey = rs->convertStdString(test1[0]);
 
 				MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
 				mask = mask | MonitoredGeofenceStates::Entered;
@@ -78,21 +97,48 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 	return geofence;
 }
 
+Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeofence(Room ^ room)
+{
+	Geofence^ geofence = nullptr;
+
+	if (room != nullptr)
+	{
+		BasicGeoposition position;
+		position.Latitude = room->GetLatitude();
+		position.Longitude = 0.0; room->GetLongitude();
+		position.Altitude = 0.0;
+		double radius = (sqrt(room->GetFloor()->GetArea()))/1.5;
+		String^ fencekey = room->GetTitle();
+
+		MonitoredGeofenceStates mask = static_cast<MonitoredGeofenceStates>(0);
+		mask = mask | MonitoredGeofenceStates::Entered;
+		mask = mask | MonitoredGeofenceStates::Exited;
+
+
+		Geocircle^ geocircle = ref new Geocircle(position, radius);
+		TimeSpan dwelltime;
+		dwelltime.Duration = 10000000;
+		bool singleUse = false;
+
+		geofence = ref new Geofence(fencekey, geocircle, mask, singleUse, dwelltime);
+
+		return geofence;
+	}
+	return geofence;
+}
+
 Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GeoFenceStuff::GenerateAllGeofences()
 {
-	StorageFolder^ roamingFolder = ApplicationData::Current->RoamingFolder;
+	//StorageFolder^ roamingFolder = ApplicationData::Current->RoamingFolder;
+
+	geofences->Clear();
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 	auto createFileTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
-		//Iterate over the results and print the list of files
-		// to the visual studio output window
 		for (auto it = filesInFolder->First(); it->HasCurrent; it->MoveNext())
 		{
 			StorageFile^ file = it->Current;
-
-			String^ output = file->Name + "\n";
-			OutputDebugString(output->Begin());
-
 			Geofence^ geofence = GenerateGeofence(file);
+
 			geofences->InsertAt(0, geofence);
 			
 		}

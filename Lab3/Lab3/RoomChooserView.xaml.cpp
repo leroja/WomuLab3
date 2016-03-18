@@ -48,15 +48,6 @@ RoomChooserView::RoomChooserView()
 	listBox->ItemsSource = filenames;
 }
 
-//StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
-//Concurrency::task<StorageFile^>(localFolder->GetFileAsync("Data.txt")).then([this](StorageFile^ file) {
-//	return FileIO::ReadTextAsync(file);
-//}).then([this, &res](Concurrency::task<String^>operation) {
-//	String^ temp;
-//	temp = operation.get();
-//	OutputDebugString(temp->Begin());
-//});
-
 Platform::Collections::Vector<Platform::String^>^ RoomChooserView::getAllfiles() {
 	filenames =  ref new Platform::Collections::Vector<Platform::String^>();
 	StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
@@ -74,50 +65,6 @@ Platform::Collections::Vector<Platform::String^>^ RoomChooserView::getAllfiles()
 	});
 	return nullptr;
 }
-	
-	/*GeoFenceStuff^ geo = ref new GeoFenceStuff();
-
-	auto createFileTask = create_task(localFolder->CreateFileAsync("text.txt", CreationCollisionOption::OpenIfExists)).then([this](StorageFile^ newFile) {
-		double volume = 10;
-		double latitude = 25;
-		double longitude = 122;
-
-		String^ title = "Title: " + "Test";
-		String^ Desc = "Description: " + "TestDesc";
-		String^ Vol = "Volume: " + volume;
-		String^ lat = "Latitude: " + latitude;
-		String^ lon = "Longitude: " + longitude;
-		String^ te = title + Desc + Vol + lat + lon;
-
-		create_task(FileIO::WriteTextAsync(newFile, te)).then([](task<void> task)
-		{
-		
-		});
-	});
-
-*/
-
-
-	//auto getFilesTask = create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ filesInFolder) {
-	//	//Iterate over the results and print the list of files
-	//	// to the visual studio output window
-	//	for (auto it = filesInFolder->First(); it->HasCurrent; it->MoveNext())
-	//	{
-	//		StorageFile^ file = it->Current;
-
-	//		geo->GenerateGeofence(file); /////
-
-	//		String^ output = file->Name + "\n";
-	////		OutputDebugString(output->Begin());
-
-	//	}
-	//});
-
-			// från fil skapa en sträng so
-			// som sedan läggs till i listboxen
-
-	//listBox->Items->Append(t);
-
 
 
 void Lab3::RoomChooserView::Home_Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -155,39 +102,37 @@ void Lab3::RoomChooserView::listBox_SelectionChanged(Platform::Object^ sender, W
 		selectedRoom->GetWall1()->setTitle(convertStdString(test1[4]));
 		selectedRoom->GetWall1()->setDescription(convertStdString(test1[5]));
 		selectedRoom->GetWall1()->setArea(::atof(test1[6].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[7]));
+		//selectedRoom->GetWall1()->setImage     (convertStdString(test1[7]));
 
 		selectedRoom->GetWall2()->setTitle(convertStdString(test1[8]));
 		selectedRoom->GetWall2()->setDescription(convertStdString(test1[9]));
 		selectedRoom->GetWall2()->setArea(::atof(test1[10].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[11]));
+		//selectedRoom->GetWall1()->setImage    (convertStdString(test1[11]));
 
 		selectedRoom->GetWall3()->setTitle(convertStdString(test1[12]));
 		selectedRoom->GetWall3()->setDescription(convertStdString(test1[13]));
 		selectedRoom->GetWall3()->setArea(::atof(test1[14].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[15]));
+		//selectedRoom->GetWall1()->setImage	(convertStdString(test1[15]));
 
 		selectedRoom->GetWall4()->setTitle(convertStdString(test1[16]));
 		selectedRoom->GetWall4()->setDescription(convertStdString(test1[17]));
 		selectedRoom->GetWall4()->setArea(::atof(test1[18].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[19]));
+		//selectedRoom->GetWall1()->setImage	(convertStdString(test1[19]));
 
 		selectedRoom->GetCeiling()->setTitle(convertStdString(test1[20]));
 		selectedRoom->GetCeiling()->setDescription(convertStdString(test1[21]));
 		selectedRoom->GetCeiling()->setArea(::atof(test1[22].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[23]));
+		//selectedRoom->GetWall1()->setImage	(convertStdString(test1[23]));
 
 		selectedRoom->GetFloor()->setTitle(convertStdString(test1[24]));
 		selectedRoom->GetFloor()->setDescription(convertStdString(test1[25]));
 		selectedRoom->GetFloor()->setArea(::atof(test1[26].c_str()));
-		//selectedRoom->GetWall1()->setTitle(convertStdString(test1[27]));
+		//selectedRoom->GetWall1()->setImage	(convertStdString(test1[27]));
 
 
 		this->Frame->Navigate(TypeName(RoomView1::typeid), selectedRoom);
 
 	});
-
-
 }
 Platform::String^ RoomChooserView::convertStdString(std::string e) {
 	std::wstring widestr = std::wstring(e.begin(), e.end());
@@ -196,39 +141,3 @@ Platform::String^ RoomChooserView::convertStdString(std::string e) {
 	return ref new String(wchart);
 
 }
-
-
-
-
-
-	/*Concurrency::task<StorageFile^>(localFolder->GetFileAsync(ayf)).then([this](StorageFile^ loadfile) {
-		return FileIO::ReadTextAsync(loadfile);
-	}).then([this](concurrency::task<String^> fileOp) {
-		String^ text;
-		text = fileOp.get();
-		std::wstring fooW(text->Begin());
-		std::string fooA(fooW.begin(), fooW.end());
-
-		vector<string> filerows;
-		stringstream test(fooA);
-		string tok;
-
-		while (getline(test, tok)) {
-			filerows.push_back(tok);
-}
-	});
-}*/
-
-
-
-
-	//	}
-	//	catch (const std::exception&)
-	//	{
-
-	//	}
-	//	
-
-	//});
-	
-	//selectedRoom = (Room)tempSelected;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MainPage.xaml.h"
+#include "Room.h"
 #include "pch.h"
 
 ref class GeoFenceStuff sealed
@@ -17,6 +18,7 @@ public:
 
 private:
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
+	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
 	void RequestLocationAccess();
 	Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
 	void OnCompleted(Windows::ApplicationModel::Background::BackgroundTaskRegistration^ sender, Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs^ e);

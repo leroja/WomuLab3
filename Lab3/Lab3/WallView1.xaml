@@ -24,7 +24,7 @@
                 <Image x:Name="WallImage" Height="193"/>
                 <Button x:Name="Save" Content="Save" Click="Save_Click" Width="150" HorizontalAlignment="Center" Margin="10"/>
                 <Button x:Name="Back" Content="Back" Click="Back_Click" Width="150" HorizontalAlignment="Center"/>
-                <Button x:Name="Home" Content="Home" Click="Home_Click" Width="150" HorizontalAlignment="Center" Margin="10"/>
+                <!--<Button x:Name="Home" Content="Home" Click="Home_Click" Width="150" HorizontalAlignment="Center" Margin="10"/>-->
             </StackPanel>
         </ScrollViewer>
     </Grid>

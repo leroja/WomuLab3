@@ -5,10 +5,8 @@ public:
 	RandomStuff();
 	virtual ~RandomStuff();
 
-	Platform::String^ GenerateSaveString(Room^ room);
-	Platform::String^ GeneratePicPath(Room^ room, Wall^ wall);
+	Platform::String^ convertStdString(std::string e);
 
 private:
-	Platform::String^ WallString(Wall^ wall);
 };
 

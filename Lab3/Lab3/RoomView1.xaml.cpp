@@ -58,7 +58,6 @@ void RoomView1::OnNavigatedTo(NavigationEventArgs^ e)
 	{
 		
 	}
-
 }
 
 
@@ -141,51 +140,38 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 		filestring += this->room->GetWall1()->GetTitle() + "\n";
 		filestring += this->room->GetWall1()->GetDescription() + "\n";
 		filestring += this->room->GetWall1()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetWall2()->GetTitle() + "\n";
 		filestring += this->room->GetWall2()->GetDescription() + "\n";
 		filestring += this->room->GetWall2()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetWall3()->GetTitle() + "\n";
 		filestring += this->room->GetWall3()->GetDescription() + "\n";
 		filestring += this->room->GetWall3()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetWall4()->GetTitle() + "\n";
 		filestring += this->room->GetWall4()->GetDescription() + "\n";
 		filestring += this->room->GetWall4()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetCeiling() ->GetTitle() + "\n";
 		filestring += this->room->GetCeiling()->GetDescription() + "\n";
 		filestring += this->room->GetCeiling()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetFloor()->GetTitle() + "\n";
 		filestring += this->room->GetFloor()->GetDescription() + "\n";
 		filestring += this->room->GetFloor()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		return FileIO::WriteTextAsync(newFile, filestring);
 	});
 }
 	
 	
-	//double Volume = this->room->getVolume();
-
-
-
-
-
-
-	//Platform::String^ FileName = "namn.end";
-
-	//auto createFileTask = create_task(localFolder->CreateFileAsync(FileName, CreationCollisionOption::ReplaceExisting)).then([](StorageFile^ newFile) {
-
-	//	//temp
-	//	String^ te = "test tets";
-	//	create_task(FileIO::WriteTextAsync(newFile,te)).then([](task<void> task)
-	//	{
-	//	
-	//	});
-	//	//Do something with new file
-	//});
 
 void Lab3::RoomView1::Updatelatlong_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
@@ -219,7 +205,5 @@ void Lab3::RoomView1::Updatelatlong_Click(Platform::Object^ sender, Windows::UI:
 
 		}
 	});
-
-
 
 }

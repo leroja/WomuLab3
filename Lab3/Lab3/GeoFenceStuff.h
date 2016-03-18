@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MainPage.xaml.h"
+#include "Room.h"
 #include "pch.h"
 
 ref class GeoFenceStuff sealed
@@ -15,8 +16,12 @@ public:
 	//Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
 	void RegisterBackgroundTask();
 
+
+	//Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
+
 private:
 	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Windows::Storage::StorageFile^ file);
+	Windows::Devices::Geolocation::Geofencing::Geofence^ GenerateGeofence(Room^ room);
 	void RequestLocationAccess();
 	Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GenerateAllGeofences();
 	void OnCompleted(Windows::ApplicationModel::Background::BackgroundTaskRegistration^ sender, Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs^ e);
@@ -26,5 +31,10 @@ private:
 	Windows::ApplicationModel::Background::BackgroundTaskRegistration^ geofenceTask;
 	Windows::Foundation::EventRegistrationToken taskCompletedToken;
 	Lab3::MainPage^ rootPage;
+
+
+
+
+	Platform::String^ convertStdString(std::string e);
 };
 

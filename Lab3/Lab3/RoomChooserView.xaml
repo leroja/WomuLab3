@@ -13,7 +13,7 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap">
-                            <Run FontWeight="Bold">Title: </Run> 
+                            <Run FontWeight="Bold">Room: </Run> 
                             <Run Text="{Binding}" />
                         </TextBlock>
                     </StackPanel>

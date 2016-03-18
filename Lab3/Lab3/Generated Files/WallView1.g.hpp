@@ -93,13 +93,6 @@ void ::Lab3::WallView1::Connect(int __connectionId, ::Platform::Object^ __target
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WallView1::Back_Click);
             }
             break;
-        case 13:
-            {
-                this->Home = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->Home))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::Lab3::WallView1::*)
-                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&WallView1::Home_Click);
-            }
-            break;
     }
     _contentLoaded = true;
 }

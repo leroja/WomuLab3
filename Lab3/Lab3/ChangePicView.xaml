@@ -13,6 +13,5 @@
         <Button x:Name="NewPic" Content="New Picture" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0" Width="280" Click="NewPic_Click"/>
         <Button x:Name="OldPic" Content="Old Picture" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Width="280" Click="OldPic_Click" Height="30"/>
         <Button x:Name="Back" Content="Back" HorizontalAlignment="Left" Margin="30,475,0,0" VerticalAlignment="Top" Width="120" Click="Back_Click"/>
-        <Button x:Name="Pic" Content="" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top" Height="80" Width="280" />
     </Grid>
 </Page>

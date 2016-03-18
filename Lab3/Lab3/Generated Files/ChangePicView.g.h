@@ -38,7 +38,6 @@ namespace Lab3
         private: ::Windows::UI::Xaml::Controls::Button^ NewPic;
         private: ::Windows::UI::Xaml::Controls::Button^ OldPic;
         private: ::Windows::UI::Xaml::Controls::Button^ Back;
-        private: ::Windows::UI::Xaml::Controls::Button^ Pic;
     };
 }
 

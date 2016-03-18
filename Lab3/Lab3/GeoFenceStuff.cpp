@@ -75,6 +75,7 @@ Windows::Devices::Geolocation::Geofencing::Geofence ^ GeoFenceStuff::GenerateGeo
 			}
 		});
 	}
+	return geofence;
 }
 
 Platform::Collections::Vector<Windows::Devices::Geolocation::Geofencing::Geofence^>^ GeoFenceStuff::GenerateAllGeofences()

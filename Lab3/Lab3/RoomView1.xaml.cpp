@@ -131,26 +131,32 @@ void Lab3::RoomView1::SaveButton_Click(Platform::Object^ sender, Windows::UI::Xa
 		filestring += this->room->GetWall1()->GetTitle() + "\n";
 		filestring += this->room->GetWall1()->GetDescription() + "\n";
 		filestring += this->room->GetWall1()->GetArea() + "\n";
+		filestring += "..." + "\n"; //for pic filepath
 
 		filestring += this->room->GetWall2()->GetTitle() + "\n";
 		filestring += this->room->GetWall2()->GetDescription() + "\n";
 		filestring += this->room->GetWall2()->GetArea() + "\n";
+		filestring += "..." + "\n";
 
 		filestring += this->room->GetWall3()->GetTitle() + "\n";
 		filestring += this->room->GetWall3()->GetDescription() + "\n";
 		filestring += this->room->GetWall3()->GetArea() + "\n";
+		filestring += "..." + "\n";
 
 		filestring += this->room->GetWall4()->GetTitle() + "\n";
 		filestring += this->room->GetWall4()->GetDescription() + "\n";
 		filestring += this->room->GetWall4()->GetArea() + "\n";
+		filestring += "..." + "\n";
 
 		filestring += this->room->GetCeiling() ->GetTitle() + "\n";
 		filestring += this->room->GetCeiling()->GetDescription() + "\n";
 		filestring += this->room->GetCeiling()->GetArea() + "\n";
+		filestring += "..." + "\n";
 
 		filestring += this->room->GetFloor()->GetTitle() + "\n";
 		filestring += this->room->GetFloor()->GetDescription() + "\n";
 		filestring += this->room->GetFloor()->GetArea() + "\n";
+		filestring += "..." + "\n";
 
 		return FileIO::WriteTextAsync(newFile, filestring);
 	});

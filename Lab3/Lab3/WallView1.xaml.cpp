@@ -40,10 +40,20 @@ void WallView1::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	try
 	{
+		App^ thisApp = (App^)Application::Current;
 		Wall^ newWall = (Wall^)e->Parameter;
 
 		if (newWall != nullptr) {
 			this->wall = newWall;
+			if (thisApp->currentWall == 6) {
+				this->textBlock1->Text = "Floor";
+			}
+			else if (thisApp->currentWall == 5) {
+				this->textBlock1->Text = "Ceiling";
+			}
+			else {
+				this->textBlock1->Text = "Wall:"+ thisApp->currentWall.ToString();
+				}
 			this->Title->Text = this->wall->GetTitle();
 			this->Description->Text = this->wall->GetDescription();
 			this->Area->Text = this->wall->GetArea().ToString();
@@ -112,7 +122,7 @@ void Lab3::WallView1::ChangePicture_Click(Platform::Object^ sender, Windows::UI:
 }
 
 void Lab3::WallView1::acel(void){
-	meter->ReportInterval = 300;
+	meter->ReportInterval = 500;
 	readingTokenOriginal = meter->ReadingChanged += ref new TypedEventHandler<Accelerometer^, AccelerometerReadingChangedEventArgs^>(this, &WallView1::ReadingChangedOriginal);
 
 

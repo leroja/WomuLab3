@@ -152,16 +152,18 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			}
 			else if ( test->AccelerationY < -0.5) {
 				Wall^ free;
+				thisApp->currentWall = 5;
 				free = thisApp->curentRoom->GetCeiling();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 5;
+				
 				break;
 			}
 			else if ( test->AccelerationY > 0.5) {
 				Wall^ free;
+				thisApp->currentWall = 6;
 				free = thisApp->curentRoom->GetFloor();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 6;
+				
 				break;
 			}
 				break;
@@ -189,9 +191,10 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			}
 			else if (test->AccelerationY > 0.5) {
 				Wall^ free;
+				thisApp->currentWall = 6;
 				free = thisApp->curentRoom->GetFloor();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 6;
+				
 				break;
 			}
 			break;
@@ -213,16 +216,18 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			}
 			else if (test->AccelerationY < -0.5) {
 				Wall^ free;
+				thisApp->currentWall = 5;
 				free = thisApp->curentRoom->GetCeiling();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 5;
+				
 				break;
 			}
 			else if (test->AccelerationY > 0.5) {
 				Wall^ free;
+				thisApp->currentWall = 6;
 				free = thisApp->curentRoom->GetFloor();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 6;
+			
 				break;
 			}
 			break;
@@ -244,16 +249,18 @@ void Lab3::WallView1::ReadingChangedOriginal(Accelerometer^ sender, Acceleromete
 			}
 			else if (test->AccelerationY < -0.5) {
 				Wall^ free;
+				thisApp->currentWall = 5;
 				free = thisApp->curentRoom->GetCeiling();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 5;
+				
 				break;
 			}
 			else if (test->AccelerationY > 0.5) {
 				Wall^ free;
+				thisApp->currentWall = 6;
 				free = thisApp->curentRoom->GetFloor();
 				this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(WallView1::typeid), free);
-				thisApp->currentWall = 6;
+				
 				break;
 			}
 			break;

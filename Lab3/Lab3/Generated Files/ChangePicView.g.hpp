@@ -58,11 +58,6 @@ void ::Lab3::ChangePicView::Connect(int __connectionId, ::Platform::Object^ __ta
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&ChangePicView::Back_Click);
             }
             break;
-        case 6:
-            {
-                this->Pic = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
-            }
-            break;
     }
     _contentLoaded = true;
 }
